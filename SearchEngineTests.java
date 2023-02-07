@@ -8,6 +8,6 @@ public class SearchEngineTests {
     System.out.println(page1.getPonderation("hello")); 
     System.out.println(page1.getPonderation("other"));
     IndexedPage page2 = new IndexedPage(new String[] {"http://fr.example2.org", "hello:5", "france:2"});
-    System.out.println("Degre de similarite des deux pages  :" + page1.proximity(page2));
+    System.out.println("Degre de similarite des deux pages :" + page1.proximity(page2));
   }
 }
