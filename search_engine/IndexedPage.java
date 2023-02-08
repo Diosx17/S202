@@ -17,11 +17,11 @@ public class IndexedPage {
     public IndexedPage(String text)
     {
         String[] lines = text.split(" ");
-        this.url = lines[0];
-        this.words = new String[lines.length-1];
-        for (int i=1; i < lines.length; ++i)
+        this.url = null;
+        this.words = new String[lines.length];
+        for (int i=0; i < lines.length; ++i)
         {
-            this.words[i-1] = lines[i];
+            this.words[i] = lines[i];
         }
 
     }
