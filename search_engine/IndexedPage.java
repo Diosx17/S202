@@ -27,7 +27,7 @@ public class IndexedPage {
         {
             this.words[i] = lines[i];
         }
-        Arrays.sort(this.words); // on trie le tableaus
+        Arrays.sort(this.words); // on trie le tableau
 
     }
 
