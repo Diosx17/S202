@@ -14,23 +14,39 @@ public class IndexedPage {
         {
             this.words[i-1] = lines[i]; // on place les mots dans le nouveau tableau
         }
-        Arrays.sort(this.words); // on trie le tableaus
+        Arrays.sort(this.words); // on trie le tableau
 
     }
 
     public IndexedPage(String text)
     {
-        String[] lines = text.split(" ");
-        this.url = null;
-        this.words = new String[lines.length];
-        for (int i=0; i < lines.length; ++i)
-        {
-            this.words[i] = lines[i];
-        }
+        this.words = text.split(" "); // on recupere les mots de la requete
+        String[] lines = new String[this.words.length];
         Arrays.sort(this.words); // on trie le tableau
+        int count = 1;
+        int compteur_mots  = 0;
 
+        for (int i=0; i < this.words.length; ++i)
+        {
+            if (i == this.words.length - 1) // si on est a la fin du tableau
+            {
+                lines[compteur_mots] = this.words[i] + ":" + count; // on ajoute le mot et sa ponderation
+                compteur_mots++;
+            }
+            else if (this.words[i].equals(this.words[i+1])) // si le mot suivant est le meme que le mot actuel
+            {
+                count++; // on incremente le compteur
+            }
+            else // sinon
+            {
+                lines[compteur_mots] = this.words[i] + ":" + count; // on ajoute le mot et sa ponderation
+                compteur_mots++;
+                count = 1; // on reinitialise le compteur
+            }
+        }
+        this.words = Arrays.copyOf(lines, compteur_mots); // on recopie le tableau dans un nouveau tableau de taille compteur_mots
+        
     }
-
     public String getUrl()
     {
         return this.url; // on retourne l'url de la page
