@@ -3,28 +3,28 @@ package search_engine;
 import java.util.Arrays;
 
 public class IndexedPage {
-    private String url; // url de la page
+    private String url; // url de la page à indexer
     private String[] words; // tableau contenant les mots de la page indexe
 
     public IndexedPage(String[] lines) 
     {
         this.url = lines[0]; // on recupere l'url qui se trouve a l'index  0 du tab
         this.words = new String[lines.length - 1]; // on cree un tableau de caracteres de longueur des lignes-1 car on ne recupere pas l'url dans ce tableau
-        for (int i=1; i < lines.length; ++i)
+        for (int i=1; i < lines.length; ++i) // on boucle sur toutes les lignes sauf la première pour ne pas prendre l'url (donc i=1 et pas 0)
         {
-            this.words[i-1] = lines[i]; // on place les mots dans le nouveau tableau
+            this.words[i-1] = lines[i]; // on place les mots dans le nouveau tableau (indice i-1 pour palier au décalage de la boucle)
         }
-        Arrays.sort(this.words); // on trie le tableau
-
+        Arrays.sort(this.words); // on trie le tableau par ordre croissant
     }
 
     public IndexedPage(String text)
     {
-        this.words = text.split(" "); // on recupere les mots de la requete
-        String[] lines = new String[this.words.length];
+        this.words = text.split(" "); // on recupere les mots de la requête
+        int count_words = this.word.length;
+        String[] lines = new String[count_words]; // on créé le tableau lines de longueur count_words
         Arrays.sort(this.words); // on trie le tableau
-        int count = 1;
-        int compteur_mots  = 0;
+        int count = 1;  // nombre de mots égaux  consécutifs
+        int compteur_mots  = 0; // permet de compter le nombre de mots différents
 
         for (int i=0; i < this.words.length; ++i)
         {
@@ -37,7 +37,7 @@ public class IndexedPage {
             {
                 count++; // on incremente le compteur
             }
-            else // sinon
+            else // sinon 
             {
                 lines[compteur_mots] = this.words[i] + ":" + count; // on ajoute le mot et sa ponderation
                 compteur_mots++;
@@ -47,18 +47,18 @@ public class IndexedPage {
         this.words = Arrays.copyOf(lines, compteur_mots); // on recopie le tableau dans un nouveau tableau de taille compteur_mots
         
     }
-    public String getUrl()
+    public String getUrl() //Getter 
     {
         return this.url; // on retourne l'url de la page
     }
 
-    public int getNorm()
+    public int getNorm() //Getter
     {
         int norm = 0; 
-        for (String word : this.words) // on parcourt les mots du tableau
+        for (String word : this.words) // pour tous les mots du tableau
         {
             String[] split_array = word.split(":"); // on separe les elements de la forme "hello:5" en ["hello","5"] 
-            int ponderation = Integer.parseInt(split_array[1]); // On initialise ponderation et on lui affecte le cast de la ponderation en entier
+            int ponderation = Integer.parseInt(split_array[1]); // On initialise ponderation et on lui affecte le cast de la ponderation en entier (ce qui suit les :)
             norm += ponderation * ponderation; // ponderation au carre
         }
         return norm; 
@@ -66,7 +66,7 @@ public class IndexedPage {
     
     public int getCount(String word)
     {
-        for (String w : this.words) // on parcourt tous les mots du tableau
+        for (String w : this.words) // pour tous les mots du tableau
         {
             String[] split_array = w.split(":");// on separe les elements de la forme "hello:5" en ["hello","5"] 
             if (split_array[0].equals(word)) // on verifie si le mot correspond a l'argument
@@ -81,9 +81,9 @@ public class IndexedPage {
         for (String w : this.words) // on parcourt tous les mots du tableau
         {
             String[] split_array = w.split(":");// on separe les elements de la forme "hello:5" en ["hello","5"] 
-            if (split_array[0].equals(word))// on verifie si le mot correspond a l'argument
+            if (split_array[0].equals(word))// on verifie si le mot correspond a l'argument (donc au mot donné)
             {
-                return Integer.parseInt(split_array[1])/Math.sqrt(this.getNorm()); // on retourne la ponderation / par la norme 
+                return Integer.parseInt(split_array[1])/Math.sqrt(this.getNorm()); // on retourne la ponderation / par la norme (sqrt car getNorm renvoie le carré de la norme)
             }
         }
         return 0; // sinon 0
