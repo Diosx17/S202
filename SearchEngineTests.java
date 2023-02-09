@@ -1,7 +1,7 @@
 import search_engine.*;
 
 public class SearchEngineTests {
-  public static void main(String[] args) 
+  public static void main(String[] args)  
   {
     IndexedPage page1 = new IndexedPage(new String[] {"http://fr.example.org","hello:10", "world:5"});
     System.out.println(page1);
@@ -13,6 +13,6 @@ public class SearchEngineTests {
     System.out.println("Le mot france dans la page requête : " + requete.getCount("france"));
     System.out.println("Le mot bonjour dans la page requête : " + requete.getCount("bonjour"));
     System.out.println("Degre de similarite des deux pages : " + page1.proximity(page2));
-    System.out.println("Degre de similarite de la requete avec la page 1 :" + page1.proximity(requete));
+    System.out.println("Degre de similarite de la requete avec la page 1 :" + page1.proximity(page2));
   }
 }

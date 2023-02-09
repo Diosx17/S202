@@ -2,6 +2,7 @@ package search_engine;
 
 import java.util.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.nio.file.Files;
 
