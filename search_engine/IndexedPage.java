@@ -20,7 +20,7 @@ public class IndexedPage {
     public IndexedPage(String text)
     {
         this.words = text.split(" "); // on recupere les mots de la requête
-        int count_words = this.word.length;
+        int count_words = this.words.length;
         String[] lines = new String[count_words]; // on créé le tableau lines de longueur count_words
         Arrays.sort(this.words); // on trie le tableau
         int count = 1;  // nombre de mots égaux  consécutifs
