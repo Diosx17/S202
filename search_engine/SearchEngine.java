@@ -36,15 +36,15 @@ public class SearchEngine
 	
 	public SearchResult[] launchRequest(String requestString) 
 	{
-		IndexedPage request = new IndexedPage(requestString);
+		IndexedPage requete = new IndexedPage(requestString);
 		SearchResult[] results = new SearchResult[getPagesNumber()];
 		for (int i=0; i<getPagesNumber(); i++)
 		{
 			IndexedPage page = getPage(i);
-			results[i] =  new SearchResult(page, page.getScore(request));
+			results[i] = new SearchResult(page.getUrl(), page.proximity(requete));
 		}
 		Arrays.sort(results);
-		return results;		
+		return results;
 		
 	}
 	
