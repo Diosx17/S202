@@ -51,15 +51,17 @@ public class IndexedPage {
 	}
 
 	public IndexedPage(Path path) {
-		List<String> liste = new ArrayList<>();
+		
+		List<String> liste = new ArrayList<>(); // on créé une liste 
 		try {
-			liste = Files.readAllLines(path);
-		} catch (IOException e) { // g�n�r� par Eclipse pour traiter les exceptions
+			System.out.println(Files.readAllLines(path));
+			liste = Files.readAllLines(path); // on ajoute à cette liste toutes les lignes du fichier donné en argument
+		} catch (IOException e) { // genere par Eclipse pour traiter les exceptions
 			System.out.println("erreur");
 		}
-
-		String[] words_in_file = new String[liste.size()];
-		words_in_file = liste.toArray(words_in_file);
+		String[] words_in_file = new String[liste.size()]; // on créé un tableau de String
+		words_in_file = liste.toArray(words_in_file); // on met dans ce tableau la liste créée précédemment et comportant les lignes du fichier cible
+		
 
 		this.url = words_in_file[0];
 		this.words = new String[words_in_file.length - 1];
