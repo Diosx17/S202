@@ -58,7 +58,6 @@ public class IndexedPage
 		List<String> liste = new ArrayList<>(); // on créé une liste 
 		try
 		{
-			System.out.println(Files.readAllLines(path));
 			liste = Files.readAllLines(path); // on ajoute à cette liste toutes les lignes du fichier donné en argument
 		} 
 		catch (IOException e) { // genere par Eclipse pour traiter les exceptions

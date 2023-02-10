@@ -8,18 +8,23 @@ import java.io.File;
 public class SearchEngine 
 {
 	private Path indexation_directory;
-	private IndexedPage[] pages; // attention IndexedPage ou IndexedPages ? 
+	private IndexedPage[] pages;
 	
 	public SearchEngine(Path indexation_directory)
 	{
 		this.indexation_directory=indexation_directory;
+		this.pages = new IndexedPage[indexation_directory.toFile().listFiles().length];
+		int i = 0;
+		for(File file: indexation_directory.toFile().listFiles())
+		{
+			this.pages[i] = new IndexedPage(file.toPath());
+			i++;
+		}
 	}
 	
 	public IndexedPage getPage(int i) 
 	{
-		//Paths.get concat�ne les deux cha�nes pour construire un chemin de type Path 
-		Path file_path = Paths.get(indexation_directory.toString(), Integer.toString(i)); // on cr�� file_path de type Path qui sera �gal au dossier suivi de l'entier du fichier
-		return new IndexedPage(file_path);
+		return this.pages[i];
 	}
 	
 	public int getPagesNumber() 
@@ -42,6 +47,7 @@ public class SearchEngine
 		{
 			IndexedPage page = getPage(i);
 			results[i] = new SearchResult(page.getUrl(), page.proximity(requete));
+			System.out.println(results[i].toString());
 		}
 		Arrays.sort(results);
 		return results;

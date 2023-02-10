@@ -24,11 +24,13 @@ public class SearchEngineTests
     IndexedPage test_chemin = new IndexedPage(fichier_test);
     System.out.println("Le mot chausson dans la page test_chemin : " + test_chemin.getCount("chausson"));
     System.out.println("Degre de similarite de la requete test avec le path : "+ requeteTestPath.proximity(test_chemin));
-
-    SearchEngine moteur = new SearchEngine(Paths.get("./INDEX"));
+    
+    SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
     System.out.println("Le nombre de pages indexees : " + moteur.getPagesNumber());
 
-    moteur.launchRequest("chausson pomme");
+    System.out.println("Le contenu de la page 0 : " + moteur.getPage(0));
+
+    moteur.launchRequest("vikidia.org chausson pomme");
 
   }
 }
