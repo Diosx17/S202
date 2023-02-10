@@ -2,15 +2,16 @@ package search_engine;
 
 import java.util.*;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class IndexedPage {
+public class IndexedPage 
+{
 	private String url; // url de la page à indexer
 	private String[] words; // tableau contenant les mots de la page indexe
 
-	public IndexedPage(String[] lines) {
+	public IndexedPage(String[] lines) 
+	{
 		this.url = lines[0]; // on recupere l'url qui se trouve a l'index 0 du tab
 		this.words = new String[lines.length - 1]; // on cree un tableau de caracteres de longueur des lignes-1 car on
 													// ne recupere pas l'url dans ce tableau
@@ -23,7 +24,8 @@ public class IndexedPage {
 		Arrays.sort(this.words); // on trie le tableau par ordre croissant
 	}
 
-	public IndexedPage(String text) {
+	public IndexedPage(String text) 
+	{
 		this.words = text.split(" "); // on recupere les mots de la requête
 		int count_words = this.words.length;
 		String[] lines = new String[count_words]; // on créé le tableau lines de longueur count_words
@@ -50,13 +52,16 @@ public class IndexedPage {
 															// compteur_mots
 	}
 
-	public IndexedPage(Path path) {
+	public IndexedPage(Path path) 
+	{
 		
 		List<String> liste = new ArrayList<>(); // on créé une liste 
-		try {
+		try
+		{
 			System.out.println(Files.readAllLines(path));
 			liste = Files.readAllLines(path); // on ajoute à cette liste toutes les lignes du fichier donné en argument
-		} catch (IOException e) { // genere par Eclipse pour traiter les exceptions
+		} 
+		catch (IOException e) { // genere par Eclipse pour traiter les exceptions
 			System.out.println("erreur");
 		}
 		String[] words_in_file = new String[liste.size()]; // on créé un tableau de String
@@ -89,7 +94,8 @@ public class IndexedPage {
 		return norm;
 	}
 
-	public int getCount(String word) {
+	public int getCount(String word) 
+	{
 		for (String w : this.words) // pour tous les mots du tableau
 		{
 			String[] split_array = w.split(":");// on separe les elements de la forme "hello:5" en ["hello","5"]
@@ -101,7 +107,8 @@ public class IndexedPage {
 		return 0;
 	}
 
-	public double getPonderation(String word) {
+	public double getPonderation(String word) 
+	{
 		for (String w : this.words) // on parcourt tous les mots du tableau
 		{
 			String[] split_array = w.split(":");// on separe les elements de la forme "hello:5" en ["hello","5"]
@@ -116,7 +123,8 @@ public class IndexedPage {
 		return 0; // sinon 0
 	}
 
-	public double proximity(IndexedPage page) {
+	public double proximity(IndexedPage page) 
+	{
 		double proximity = 0;
 		for (String word : this.words) // on parcourt tous les mots du tableau
 		{
@@ -129,7 +137,8 @@ public class IndexedPage {
 		return proximity;
 	}
 
-	public String toString() {
+	public String toString() 
+	{
 		return "IndexedPage [url=" + this.url + "]"; // on affiche sous cette forme la page
 	}
 }

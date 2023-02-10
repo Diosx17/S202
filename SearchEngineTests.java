@@ -3,7 +3,8 @@ import search_engine.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class SearchEngineTests {
+public class SearchEngineTests 
+{
   public static void main(String[] args)  
   {
     IndexedPage page1 = new IndexedPage(new String[] {"http://fr.example.org","hello:10", "world:5"});
@@ -18,8 +19,10 @@ public class SearchEngineTests {
     System.out.println("Degre de similarite des deux pages : " + page1.proximity(page2));
     System.out.println("Degre de similarite de la requete avec la page 1 :" + page1.proximity(page2));
     
-    Path fichier_test = Paths.get("C:\\Users\\rayan\\OneDrive\\Desktop\\test.txt");
+    Path fichier_test = Paths.get("./INDEX/0.txt");
+    IndexedPage requeteTestPath = new IndexedPage("chausson");
     IndexedPage test_chemin = new IndexedPage(fichier_test);
     System.out.println("Le mot chausson dans la page test_chemin : " + test_chemin.getCount("chausson"));
+    System.out.println("Degre de similarite de la requete test avec le path : "+ requeteTestPath.proximity(test_chemin));
   }
 }
