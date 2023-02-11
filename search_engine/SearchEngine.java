@@ -1,9 +1,12 @@
 package search_engine;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths; 
 import java.io.File;
+import java.lang.reflect.Array;
 
 public class SearchEngine 
 {
@@ -41,16 +44,39 @@ public class SearchEngine
 	
 	public SearchResult[] launchRequest(String requestString) 
 	{
+		
 		IndexedPage requete = new IndexedPage(requestString);
-		SearchResult[] results = new SearchResult[getPagesNumber()];
-		for (int i=0; i<getPagesNumber(); i++)
+		ArrayList<Double> scores2 = new ArrayList<Double>();
+		
+		for(int i = 0; i<getPagesNumber(); ++i)
 		{
 			IndexedPage page = getPage(i);
-			results[i] = new SearchResult(page.getUrl(), page.proximity(requete));
-			System.out.println(results[i].toString());
+		
+			if(requete.proximity(page)>0.0)
+			{
+				scores2.add(requete.proximity(page));
+			}
 		}
-		Arrays.sort(results);
-		return results;
+		Collections.sort(scores2, Collections.reverseOrder());
+		double[] scores = new double[scores2.size()];
+		SearchResult[] results = new SearchResult[scores2.size()];
+		
+		for(int i = 0; i<scores2.size(); ++i)
+		{
+			scores[i] = scores2.get(i);
+		}
+
+		
+
+		for(int i = 0;i<scores.length;++i)
+		{
+			IndexedPage page = getPage(i);
+			results[i] = new SearchResult(page.getUrl(), scores[i]);
+			System.out.println(results[i].toString());
+
+		}
+
+		return results;	
 		
 	}
 	

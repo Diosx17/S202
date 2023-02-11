@@ -30,7 +30,7 @@ public class SearchEngineTests
 
     System.out.println("Le contenu de la page 0 : " + moteur.getPage(0));
 
-    moteur.launchRequest("vikidia.org chausson pomme");
+    moteur.launchRequest("chausson pomme");
 
   }
 }
