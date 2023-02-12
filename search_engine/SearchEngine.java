@@ -1,12 +1,9 @@
 package search_engine;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.nio.file.Path;
-import java.nio.file.Paths; 
 import java.io.File;
-import java.lang.reflect.Array;
 
 public class SearchEngine 
 {

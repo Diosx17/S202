@@ -121,6 +121,7 @@ public class IndexedPage
 		}
 		return 0; // sinon 0
 	}
+	
 
 	public double proximity(IndexedPage page) 
 	{
