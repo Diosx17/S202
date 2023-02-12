@@ -48,7 +48,6 @@ public class SearchEngine
 		for(int i = 0; i<getPagesNumber(); ++i)
 		{
 			IndexedPage page = getPage(i);
-		
 			if(requete.proximity(page)>0.0)
 			{
 				scores2.add(requete.proximity(page));

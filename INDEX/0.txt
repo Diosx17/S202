@@ -1,7 +1,7 @@
 https://fr.vikidia.org/wiki/Chausson_aux_pommes
 chausson:2
 aux:2
-pommer:3
+pommes:3
 an:1
 est:1
 faire:1
