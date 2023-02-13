@@ -3,6 +3,7 @@ import search_engine.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class SearchEngineTests 
 {
@@ -33,15 +34,26 @@ public class SearchEngineTests
 
    */
 
+    switch (args.length) {
+
+      case 0:
+      System.out.println("aucun arg");
+        
+        break;
     
-    String requete = "";
-    for(int i = 0; i<args.length; ++i)
-    {
-        requete += args[i] + " ";
+      default:
+          String requete = "";
+          for(int i = 0; i<args.length; ++i)
+          {
+              requete += args[i] + " ";
+          }
+          
+          SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
+          SearchResult[] results = moteur.launchRequest(requete);
+          moteur.printResults(requete);
+        break;
     }
-    
-    SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
-    SearchResult[] results = moteur.launchRequest(requete);
+      
 
 
 

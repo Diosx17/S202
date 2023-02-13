@@ -68,7 +68,6 @@ public class SearchEngine
 		{
 			IndexedPage page = getPage(i);
 			results[i] = new SearchResult(page.getUrl(), scores[i]);
-			System.out.println(results[i].toString());
 
 		}
 
