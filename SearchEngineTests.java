@@ -23,24 +23,37 @@ public class SearchEngineTests
     System.out.println("Degre de similarite de la page 1 avec la page 2 :" + page1.proximity(page2));
     
     Path fichier_test = Paths.get("./INDEX/0.txt");
-    IndexedPage requeteTestPath = new IndexedPage("chausson");
+    IndexedPage requeteTestPath = new IndexedPage("sandwich");
     IndexedPage test_chemin = new IndexedPage(fichier_test);
-    System.out.println("Le mot chausson dans la page test_chemin : " + test_chemin.getCount("chausson"));
+    System.out.println("Le mot chausson dans la page test_chemin : " + test_chemin.getCount("sandwich"));
     System.out.println("Degre de similarite de la requete test avec le path : "+ requeteTestPath.proximity(test_chemin));
     
     SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
     System.out.println("Le nombre de pages indexees : " + moteur.getPagesNumber());
+    */
 
-
-   */
+    
 
     switch (args.length) {
 
       case 0:
-      System.out.println("aucun arg");
-        
-        break;
-    
+      try ( Scanner scanner = new Scanner( System.in ) ) {
+        SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
+        while (true)
+        { // true c'est pour faire une boucle infinie et s'arrêter uniquement quand on exit
+            System.out.print("Veuillez saisir votre requete : (exit pour fermer)");
+            String entree = scanner.nextLine();
+            
+            if (entree.equals("exit")){
+              break;
+            }
+            
+            SearchResult[] results = moteur.launchRequest(entree);
+            System.out.println(Arrays.toString(results));
+        }
+      }
+      break;
+
       default:
           String requete = "";
           for(int i = 0; i<args.length; ++i)
@@ -54,8 +67,5 @@ public class SearchEngineTests
         break;
     }
       
-
-
-
   }
 }
