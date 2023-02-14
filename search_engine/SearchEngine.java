@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.nio.file.Path;
 import java.io.File;
+import java.util.HashMap;
 
 public class SearchEngine 
 {
@@ -44,6 +45,8 @@ public class SearchEngine
 		
 		IndexedPage requete = new IndexedPage(requestString);
 		ArrayList<Double> scores2 = new ArrayList<Double>();
+		ArrayList<String> urls = new ArrayList<String>();
+	
 		
 		for(int i = 0; i<getPagesNumber(); ++i)
 		{
@@ -51,14 +54,17 @@ public class SearchEngine
 			if(requete.proximity(page)>0.0)
 			{
 				scores2.add(requete.proximity(page));
+		
 			}
 		}
+		Collections.sort(scores2,Collections.reverseOrder());
+		
 		
 		// LE PROBLEME EST EN DESSOUS
 		
-		Collections.sort(scores2, Collections.reverseOrder());
-		double[] scores = new double[scores2.size()];
-		SearchResult[] results = new SearchResult[scores2.size()];
+		
+		double[] scores = new double[resultats.size()];
+		SearchResult[] results = new SearchResult[resultats.size()];
 		
 		for(int i = 0; i<scores2.size(); ++i)
 		{
@@ -88,5 +94,7 @@ public class SearchEngine
 		}
 		
 	}
+
+	
 	
 }
