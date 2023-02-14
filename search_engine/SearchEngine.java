@@ -29,7 +29,7 @@ public class SearchEngine
 	
 	public int getPagesNumber() 
 	{
-		File[] files = indexation_directory.toFile().listFiles(); // on cr�� un tableau de fichiers qui contient tous les fichiers du dossier indexation_directory
+		File[] files = indexation_directory.toFile().listFiles(); // on cree un tableau de fichiers qui contient tous les fichiers du dossier indexation_directory
 		int count = 0;
 		for (File file : files) {
 		  if (file.isFile()) {
@@ -53,6 +53,9 @@ public class SearchEngine
 				scores2.add(requete.proximity(page));
 			}
 		}
+		
+		// LE PROBLEME EST EN DESSOUS
+		
 		Collections.sort(scores2, Collections.reverseOrder());
 		double[] scores = new double[scores2.size()];
 		SearchResult[] results = new SearchResult[scores2.size()];
@@ -71,6 +74,7 @@ public class SearchEngine
 
 		}
 
+		// LE PROBLEME EST AU DESSUS
 		return results;	
 		
 	}
@@ -80,7 +84,7 @@ public class SearchEngine
 		SearchResult[] results = launchRequest(requestString);
 		for (int i=0; i<results.length; i++)
 		{
-			System.out.println(results[i].toString());
+			System.out.println(results[i]);
 		}
 		
 	}
