@@ -3,7 +3,7 @@ package search_engine;
 import java.util.Arrays;
 
 public class IndexedPage {
-    private String url; // url de la page à indexer
+    private String url; // url de la page a indexer
     private String[] words; // tableau contenant les mots de la page indexe
 
     public IndexedPage(String[] lines) 
@@ -12,16 +12,16 @@ public class IndexedPage {
         this.words = new String[lines.length - 1]; // on cree un tableau de caracteres de longueur des lignes-1 car on ne recupere pas l'url dans ce tableau
         for (int i=1; i < lines.length; ++i) // on boucle sur toutes les lignes sauf la première pour ne pas prendre l'url (donc i=1 et pas 0)
         {
-            this.words[i-1] = lines[i]; // on place les mots dans le nouveau tableau (indice i-1 pour palier au décalage de la boucle)
+            this.words[i-1] = lines[i]; // on place les mots dans le nouveau tableau (indice i-1 pour pallier au décalage de la boucle)
         }
         Arrays.sort(this.words); // on trie le tableau par ordre croissant
     }
 
     public IndexedPage(String text)
     {
-        this.words = text.split(" "); // on recupere les mots de la requête
+        this.words = text.split(" "); // on recupere les mots de la requete
         int count_words = this.words.length;
-        String[] lines = new String[count_words]; // on créé le tableau lines de longueur count_words
+        String[] lines = new String[count_words]; // on cree le tableau lines de longueur count_words
         Arrays.sort(this.words); // on trie le tableau
         int count = 1;  // nombre de mots égaux  consécutifs
         int compteur_mots  = 0; // permet de compter le nombre de mots différents
@@ -71,7 +71,7 @@ public class IndexedPage {
             String[] split_array = w.split(":");// on separe les elements de la forme "hello:5" en ["hello","5"] 
             if (split_array[0].equals(word)) // on verifie si le mot correspond a l'argument
             {
-                return Integer.parseInt(split_array[1]); // on retourne la ponderation avec un cast
+                return Integer.parseInt(split_array[1]); // on retourne la ponderation
             }
         }
         return 0;
@@ -81,9 +81,9 @@ public class IndexedPage {
         for (String w : this.words) // on parcourt tous les mots du tableau
         {
             String[] split_array = w.split(":");// on separe les elements de la forme "hello:5" en ["hello","5"] 
-            if (split_array[0].equals(word))// on verifie si le mot correspond a l'argument (donc au mot donné)
+            if (split_array[0].equals(word))// on verifie si le mot correspond a l'argument (donc au mot donne)
             {
-                return Integer.parseInt(split_array[1])/Math.sqrt(this.getNorm()); // on retourne la ponderation / par la norme (sqrt car getNorm renvoie le carré de la norme)
+                return Integer.parseInt(split_array[1])/Math.sqrt(this.getNorm()); // on retourne la ponderation / par la norme (sqrt car getNorm renvoie le carre de la norme)
             }
         }
         return 0; // sinon 0

@@ -1,3 +1,5 @@
+package search_engine_tests;
+
 import search_engine.*;
 
 public class SearchEngineTests {
