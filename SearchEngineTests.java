@@ -37,7 +37,8 @@ public class SearchEngineTests
     switch (args.length) {
 
       case 0:
-      try ( Scanner scanner = new Scanner( System.in ) ) {
+      try (Scanner scanner = new Scanner(System.in))
+       {
         SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
         while (true)
         { // true c'est pour faire une boucle infinie et s'arrêter uniquement quand on exit
@@ -47,9 +48,7 @@ public class SearchEngineTests
             if (entree.equals("exit")){
               break;
             }
-            
-            SearchResult[] results = moteur.launchRequest(entree);
-            System.out.println(Arrays.toString(results));
+            moteur.printResults(entree);
         }
       }
       break;
@@ -62,7 +61,6 @@ public class SearchEngineTests
           }
           
           SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
-          SearchResult[] results = moteur.launchRequest(requete);
           moteur.printResults(requete);
         break;
     }

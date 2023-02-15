@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.nio.file.Path;
 import java.io.File;
+import java.util.Map;
 import java.util.HashMap;
 
 public class SearchEngine 
@@ -42,55 +43,34 @@ public class SearchEngine
 	
 	public SearchResult[] launchRequest(String requestString) 
 	{
-		
-		IndexedPage requete = new IndexedPage(requestString);
-		ArrayList<Double> scores2 = new ArrayList<Double>();
-		ArrayList<String> urls = new ArrayList<String>();
-	
-		
-		for(int i = 0; i<getPagesNumber(); ++i)
+		HashMap<String, Double> resultContainer = new HashMap<String, Double>(); // Utilisation d'un HashMap car cela me permet de trier les valeurs 
+		IndexedPage requete = new IndexedPage(requestString); 					//par ordre decroissant grace a la methode sort sans passer par un tableau de SearchResult avec lequel ca aurait ete plus fastidieux
+
+		for(int i= 0;i<this.getPagesNumber();++i)
 		{
-			IndexedPage page = getPage(i);
-			if(requete.proximity(page)>0.0)
+			if(requete.proximity(this.getPage(i))>0)
 			{
-				scores2.add(requete.proximity(page));
-		
+				resultContainer.put(this.getPage(i).getUrl(),requete.proximity(this.getPage(i)));
 			}
-		}
-		Collections.sort(scores2,Collections.reverseOrder());
-		
-		
-		// LE PROBLEME EST EN DESSOUS
-		
-		
-		double[] scores = new double[resultats.size()];
-		SearchResult[] results = new SearchResult[resultats.size()];
-		
-		for(int i = 0; i<scores2.size(); ++i)
-		{
-			scores[i] = scores2.get(i);
-		}
+		}	
 
 		
+		
+		
+	
 
-		for(int i = 0;i<scores.length;++i)
-		{
-			IndexedPage page = getPage(i);
-			results[i] = new SearchResult(page.getUrl(), scores[i]);
-
-		}
-
-		// LE PROBLEME EST AU DESSUS
-		return results;	
+		return results;
 		
 	}
 	
 	public void printResults(String requestString) 
 	{
 		SearchResult[] results = launchRequest(requestString);
-		for (int i=0; i<results.length; i++)
+		for (int i=0; i<15; i++)
 		{
-			System.out.println(results[i]);
+			if(results[i]!=null)
+				System.out.println(results[i]);
+			
 		}
 		
 	}
