@@ -50,7 +50,7 @@ public class test03 {
 
     //Fonction permettant d'enlever les mots qui appartiennent à ListeNoire.txt
     public static String enleverMotsListeNoire(String chaine) throws Exception {
-        String listeNoire = lire("src/test03/ListeNoire.txt");
+        String listeNoire = lire("S202/src/test03/ListeNoire.txt");
         listeNoire = enleverCaracteresSpeciaux(listeNoire);
         String[] listeNoireTableau = listeNoire.split(" ");
         String[] chaineTableau = chaine.split(" ");
@@ -77,7 +77,7 @@ public class test03 {
 
     //lemmatise
     public static String lemmatise(String chaine) throws Exception {
-        String dictPath = "src/test03/dictiofr.txt";
+        String dictPath = "S202/src/test03/dictiofr.txt";
         // On crée la hashmap
         Map<String, String> lemmaDict = new HashMap<>();
         // On lit le fichier dictiofr.txt ligne par ligne
@@ -108,7 +108,7 @@ public class test03 {
         //On ouvre le fichier a l'aide de la fonction lire
         //puis on va appeler les différentes fonctions
         //et on va afficher le contenu du fichier une fois les modifications effectuées
-        String nomFichier = "src/test03/test03.txt";
+        String nomFichier = "S202/src/test03/test03.txt";
         String contenu = lire(nomFichier);
         contenu = enleverCaracteresSpeciaux(contenu);
         contenu = enleverMotsListeNoire(contenu);
