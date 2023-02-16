@@ -1,11 +1,13 @@
 package search_engine;
 
-import java.util.Collections;
-import java.util.ArrayList;
 import java.nio.file.Path;
 import java.io.File;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
 
 public class SearchEngine 
 {
@@ -55,8 +57,24 @@ public class SearchEngine
 		}	
 
 		
+		List<Map.Entry<String, Double>> listeDuHashmap = new ArrayList<>(resultContainer.entrySet()); // on cree une liste de Map.Entry qui contient les elements de la hashmap
+		listeDuHashmap.sort(Map.Entry.comparingByValue(Comparator.reverseOrder())); // on trie la liste par ordre decroissant
 		
 		
+		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste trie
+		for (Map.Entry<String, Double> entry : listeDuHashmap) // on ajoute les elements de la liste trie a la hashmap
+		{
+			sortedContainer.put(entry.getKey(), entry.getValue());
+		}
+		
+	
+		SearchResult[] results = new SearchResult[sortedContainer.size()]; // on cree un tableau de SearchResult qui va contenir les elements de la hashmap trie
+		int i = 0;
+		for (Map.Entry<String, Double> MapEntree : sortedContainer.entrySet())  // on ajoute les elements de la hashmap trie au tableau de SearchResult
+		{
+			results[i] = new SearchResult(MapEntree.getKey(), MapEntree.getValue());
+			i++;
+		}
 	
 
 		return results;
@@ -66,12 +84,22 @@ public class SearchEngine
 	public void printResults(String requestString) 
 	{
 		SearchResult[] results = launchRequest(requestString);
-		for (int i=0; i<15; i++)
+		if(results.length<15)
 		{
-			if(results[i]!=null)
+			for(int i = 0;i<results.length;++i)
+			{
 				System.out.println(results[i]);
-			
+			}
 		}
+		else
+		{
+			for (int i=0; i<15; i++)
+			{
+				System.out.println(results[i]);
+				
+			}
+		}
+		
 		
 	}
 
