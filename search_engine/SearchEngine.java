@@ -72,7 +72,7 @@ public class SearchEngine
 		int i = 0;
 		for (Map.Entry<String, Double> MapEntree : sortedContainer.entrySet())  // on ajoute les elements de la hashmap trie au tableau de SearchResult
 		{
-			results[i] = new SearchResult(MapEntree.getKey(), MapEntree.getValue());
+			results[i] = new SearchResult(MapEntree.getKey(), MapEntree.getValue()*100);
 			i++;
 		}
 	
