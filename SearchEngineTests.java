@@ -15,7 +15,7 @@ public class SearchEngineTests
           SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
           while (true)
           { // true c'est pour faire une boucle infinie et s'arrêter uniquement quand on exit
-              System.out.print("Veuillez saisir votre requete : (exit pour fermer)");
+              System.out.print("Veuillez saisir votre requete : (exit pour fermer) ");
               String entree = scanner.nextLine();
               
               if (entree.equals("exit"))
@@ -23,7 +23,7 @@ public class SearchEngineTests
                 break;
               }
               moteur.printResults(entree);
-              break;
+            
           }
           break;
         }

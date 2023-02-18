@@ -52,7 +52,7 @@ public class SearchEngine
 		{
 			if(requete.proximity(this.getPage(i))>0)
 			{
-				resultContainer.put(this.getPage(i).getUrl(),requete.proximity(this.getPage(i)));
+				resultContainer.put(this.getPage(i).getUrl(),requete.proximity(this.getPage(i))*100);
 			}
 		}	
 
