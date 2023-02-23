@@ -8,12 +8,53 @@ import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
+import java.util.Scanner;
+import java.nio.file.Paths;
 
 public class SearchEngine 
 {
 	private Path indexation_directory;
 	private IndexedPage[] pages;
 	
+	public static void main(String[] args) 
+	{
+		switch (args.length) {
+
+			case 0:
+			  try (Scanner scanner = new Scanner(System.in))
+			  {
+				SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
+				while (true)
+				{ // true c'est pour faire une boucle infinie et s'arrêter uniquement quand on exit
+					System.out.print("Veuillez saisir votre requete : (exit pour fermer) ");
+					String entree = scanner.nextLine();
+					
+					if (entree.equals("exit"))
+					{
+					  break;
+					}
+					moteur.printResults(entree);
+				  
+				}
+				break;
+			  }
+			  
+	  
+			default:
+				String requete = "";
+				for(int i = 0; i<args.length; ++i)
+				{
+					requete += args[i] + " ";
+				}
+				
+				SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
+				moteur.printResults(requete);
+			  break;
+		  }
+			
+		
+		
+	}
 	public SearchEngine(Path indexation_directory)
 	{
 		this.indexation_directory=indexation_directory;
