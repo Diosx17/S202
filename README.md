@@ -5,7 +5,7 @@
 2 - Compiler le projet
 
 ```bash
-javac search_engine/Search_Engine_Test.java
+javac search_engine_tests/SearchEngineTests.java
 ```
 
 3 - Lancer le projet \
