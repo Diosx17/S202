@@ -1,7 +1,6 @@
 import search_engine.*;
 
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.net.URL;
 import java.nio.file.Path;
 
