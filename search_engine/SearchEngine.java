@@ -55,7 +55,7 @@ public class SearchEngine
 		
 		
 	}
-	
+
 	public SearchEngine(Path indexation_directory)
 	{
 		this.indexation_directory=indexation_directory;
@@ -103,7 +103,7 @@ public class SearchEngine
 		listeDuHashmap.sort(Map.Entry.comparingByValue(Comparator.reverseOrder())); // on trie la liste par ordre decroissant
 		
 		
-		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste trie
+		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste trie, il faut qu'elle soit de type LinkedHashMap car elle garde l'ordre d'insertion
 		for (Map.Entry<String, Double> entry : listeDuHashmap) // on ajoute les elements de la liste trie a la hashmap
 		{
 			sortedContainer.put(entry.getKey(), entry.getValue());
