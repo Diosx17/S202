@@ -55,6 +55,7 @@ public class SearchEngine
 		
 		
 	}
+	
 	public SearchEngine(Path indexation_directory)
 	{
 		this.indexation_directory=indexation_directory;

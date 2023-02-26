@@ -1,3 +1,4 @@
+package search_engine_tests;
 import search_engine.*;
 
 import java.nio.file.Paths;
@@ -32,6 +33,6 @@ public class SearchEngineTests
     {
       System.out.println(result.getUrl()+" : " + result.getScore());
     }
-  
+
   }
 }
