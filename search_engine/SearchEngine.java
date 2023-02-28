@@ -23,7 +23,7 @@ public class SearchEngine
 			case 0:
 			  try (Scanner scanner = new Scanner(System.in))
 			  {
-				SearchEngine moteur = new SearchEngine(Paths.get("./INDEX/"));
+				SearchEngine moteur = new SearchEngine(Paths.get("./txt/INDEX/"));
 				while (true)
 				{ // true c'est pour faire une boucle infinie et s'arrêter uniquement quand on exit
 					System.out.print("Veuillez saisir votre requete : (exit pour fermer) ");
