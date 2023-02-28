@@ -216,7 +216,7 @@ public class SearchEngine
 
     //lemmatise
     public static String lemmatise(String chaine) throws Exception {
-        String dictPath = "S202/src/test03/dictiofr.txt";
+        String dictPath = "./txt/dictiofr.txt";
         // On crée la hashmap
         Map<String, String> lemmaDict = new HashMap<>();
         // On lit le fichier dictiofr.txt ligne par ligne
