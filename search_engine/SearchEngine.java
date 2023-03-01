@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -20,8 +21,16 @@ public class SearchEngine
 	private Path indexation_directory;
 	private IndexedPage[] pages;
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception 
 	{
+		System.setProperty("file.encoding", "UTF-8");
+		String chaineAvecSpeciaux = "ceci est un test salut-salut yacht-club wagons-réservoirs voligeait abaisse-langue ";
+	    String chaineSansSpeciaux = enleverCaracteresSpeciaux(chaineAvecSpeciaux);
+	    System.out.println(chaineAvecSpeciaux);
+	    System.out.println(chaineSansSpeciaux);
+
+		chaineSansSpeciaux = lemmatise(chaineSansSpeciaux);
+		System.out.println(chaineSansSpeciaux);
 		switch (args.length) {
 
 			case 0:
@@ -171,16 +180,59 @@ public class SearchEngine
         return chaineMinuscule;
     }
 
+
     //Fonction pour enlever tous les caractères n'étant pas des lettres
-    public static String enleverCaracteresSpeciaux(String chaine) {
-        String chaineSansCaracteresSpeciaux = "";
+    public static String enleverCaracteresSpeciaux(String chaine) throws IOException {
+		String[] separate_words = chaine.split(" "); 
+        String chaineSansCaracteresSpeciaux = "";    
+		boolean contains_dash = false;
+		boolean find = false;
+		int x=0;
+		//pour tous les mots dans la chaîne de carractere
+		for (String word : separate_words){
+			for (int i = 0; i < word.length(); i++){
+				if (word.charAt(i) == '-'){
+					contains_dash = true;
+				}	
+			}
+			if (contains_dash == true ){
+				String dictPath = "txt/dictiofr.txt";
+				// On crée la hashmap
+				Map<String, String> lemmaDict = new HashMap<>();
+				// On lit le fichier dictiofr.txt ligne par ligne
+				for (String line : Files.readAllLines(Paths.get(dictPath), StandardCharsets.UTF_8)) {
+					// On split chaque ligne en deux séparées les ":" puis on ajoute le mot et sa lemmatisation dans
+					// la hashmap
+					String[] dictSplit = line.split(":");
+					lemmaDict.put(dictSplit[0], dictSplit[1]);
+				}
+				for(int i = 0; i < separate_words.length; i++) {
+					// On regade si le mot word est dans le dictionnaire
+					//String lemma = lemmaDict.get(chaineTableau[i]);
+					if (lemmaDict.containsKey(word)){
+						find = true;
+						System.out.println(word);
+					}
+					
+				}
+				if (find == false){ //si le mot contenant le '-' n'est pas dans le dico alors on remplace le ' ' par un espace
+					String new_word = word.replace('-',' ');
+					separate_words[x] = new_word;
+				}
+			}
+			x++;
+		}
+		System.out.println();
+		chaine = String.join(" ",separate_words);
+		System.out.println("la chaine " + chaine);
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une apostrophe ou des guillemets, on le remplace par un espace
-            if (chaine.charAt(i) == '\'' || chaine.charAt(i) == '"' || chaine.charAt(i) == '’') {
+            if (chaine.charAt(i) == '\'' || chaine.charAt(i) == '"' || chaine.charAt(i) == '’')
+			{
                 chaineSansCaracteresSpeciaux += " ";
             }
-            //si le caractère est une lettre ou un espace on l'ajoute a la chaine
-            else if (Character.isLetter(chaine.charAt(i)) || chaine.charAt(i) == ' ') {
+            //si le caractère est une lettre ou un espace ou un - on l'ajoute a la chaine
+            else if (Character.isLetter(chaine.charAt(i)) || chaine.charAt(i) == ' ' || chaine.charAt(i) == '-') {
                 chaineSansCaracteresSpeciaux += chaine.charAt(i);
             }
         }
@@ -216,7 +268,7 @@ public class SearchEngine
 
     //lemmatise
     public static String lemmatise(String chaine) throws Exception {
-        String dictPath = "./txt/dictiofr.txt";
+        String dictPath = "txt/dictiofr.txt";
         // On crée la hashmap
         Map<String, String> lemmaDict = new HashMap<>();
         // On lit le fichier dictiofr.txt ligne par ligne
@@ -227,22 +279,21 @@ public class SearchEngine
             lemmaDict.put(dictSplit[0], dictSplit[1]);
         }
         String[] chaineTableau = chaine.split(" ");
-        String chaineLemmatisée = "";
+        String chaineLemmatise = "";
         for(int i = 0; i < chaineTableau.length; i++) {
             // On regarde si le mot est dans la hashmap avec la fonction get
             String lemma = lemmaDict.get(chaineTableau[i]);
             // Si c'est le cas on ajoute le mot lemmatisé et un espace à la suite
             if (lemma != null) {
-                chaineLemmatisée += lemma + " ";
+                chaineLemmatise += lemma + " ";
             }
             // Sinon on ajoute le mot inchangé et un espace à la suite
             else {
-                chaineLemmatisée += chaineTableau[i] + " ";
+                chaineLemmatise += chaineTableau[i] + " ";
             }
         }
-        return chaineLemmatisée;
+        return chaineLemmatise;
     }
-
 	
 	
 }
