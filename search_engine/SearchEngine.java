@@ -24,13 +24,7 @@ public class SearchEngine
 	public static void main(String[] args) throws Exception 
 	{
 		System.setProperty("file.encoding", "UTF-8");
-		String chaineAvecSpeciaux = "ceci est un test salut-salut yacht-club wagons-réservoirs voligeait abaisse-langue ";
-	    String chaineSansSpeciaux = enleverCaracteresSpeciaux(chaineAvecSpeciaux);
-	    System.out.println(chaineAvecSpeciaux);
-	    System.out.println(chaineSansSpeciaux);
 
-		chaineSansSpeciaux = lemmatise(chaineSansSpeciaux);
-		System.out.println(chaineSansSpeciaux);
 		switch (args.length) {
 
 			case 0:
@@ -158,7 +152,7 @@ public class SearchEngine
 		
 	}
 	//LectureFichier
-    public static String lire(String nomFichier) throws Exception {
+    public static String read(String nomFichier) throws Exception {
         String contenu = "";
         File fichier = new File(nomFichier);
         Scanner lecteur = new Scanner(fichier);
@@ -171,7 +165,7 @@ public class SearchEngine
     }
 
     //majuscule en minuscule
-    public static String minuscule(String chaine) {
+    public static String lowercase(String chaine) {
         String chaineMinuscule = "";
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une majuscule on le transforme en minuscule
@@ -182,7 +176,7 @@ public class SearchEngine
 
 
     //Fonction pour enlever tous les caractères n'étant pas des lettres
-    public static String enleverCaracteresSpeciaux(String chaine) throws IOException {
+    public static String removeSpecialCharacters(String chaine) throws IOException {
 		String[] separate_words = chaine.split(" "); 
         String chaineSansCaracteresSpeciaux = "";    
 		boolean contains_dash = false;
@@ -211,7 +205,6 @@ public class SearchEngine
 					//String lemma = lemmaDict.get(chaineTableau[i]);
 					if (lemmaDict.containsKey(word)){
 						find = true;
-						System.out.println(word);
 					}
 					
 				}
@@ -222,9 +215,7 @@ public class SearchEngine
 			}
 			x++;
 		}
-		System.out.println();
 		chaine = String.join(" ",separate_words);
-		System.out.println("la chaine " + chaine);
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une apostrophe ou des guillemets, on le remplace par un espace
             if (chaine.charAt(i) == '\'' || chaine.charAt(i) == '"' || chaine.charAt(i) == '’')
@@ -240,9 +231,9 @@ public class SearchEngine
     }
 
     //Fonction permettant d'enlever les mots qui appartiennent à ListeNoire.txt
-    public static String enleverMotsListeNoire(String chaine) throws Exception {
-        String listeNoire = lire("./txt/ListeNoire.txt");
-        listeNoire = enleverCaracteresSpeciaux(listeNoire);
+    public static String removeWordsBlackList(String chaine) throws Exception {
+        String listeNoire = read("./txt/ListeNoire.txt");
+        listeNoire = removeSpecialCharacters(listeNoire);
         String[] listeNoireTableau = listeNoire.split(" ");
         String[] chaineTableau = chaine.split(" ");
         String chaineSansMotsListeNoire = "";
@@ -255,7 +246,7 @@ public class SearchEngine
     }
 
     //enlever mot de 1 et 2 lettres
-    public static String enleverMotsPetits(String chaine) {
+    public static String removeSmallWords(String chaine) {
         String[] chaineTableau = chaine.split(" ");
         String chaineSansMotsPetits = "";
         for (int i = 0; i < chaineTableau.length; i++) {
@@ -266,8 +257,8 @@ public class SearchEngine
         return chaineSansMotsPetits;
     }
 
-    //lemmatise
-    public static String lemmatise(String chaine) throws Exception {
+    //lemmatize
+    public static String lemmatize(String chaine) throws Exception {
         String dictPath = "txt/dictiofr.txt";
         // On crée la hashmap
         Map<String, String> lemmaDict = new HashMap<>();
