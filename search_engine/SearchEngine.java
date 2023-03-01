@@ -232,7 +232,7 @@ public class SearchEngine
 
     //Fonction permettant d'enlever les mots qui appartiennent à ListeNoire.txt
     public static String removeWordsBlackList(String chaine) throws Exception {
-        String listeNoire = read("./txt/ListeNoire.txt");
+        String listeNoire = read("./txt/blacklist.txt");
         listeNoire = removeSpecialCharacters(listeNoire);
         String[] listeNoireTableau = listeNoire.split(" ");
         String[] chaineTableau = chaine.split(" ");
