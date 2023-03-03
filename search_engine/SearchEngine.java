@@ -174,120 +174,12 @@ public class SearchEngine
         return chaineMinuscule;
     }
 
-	public static String replaceBadAccents(String chaine) throws IOException {	
-		String[] separate_words = chaine.split(" ");
-		String chaineSansAccents = "";
-		int x=0;
-		//pour tous les mots dans la chaîne de carractere
-		for (String word : separate_words){
-			for (int i = 0; i < word.length(); i++){
-				//si le caractère est un accent
-				if (word.charAt(i) == 'é' || word.charAt(i) == 'è' || word.charAt(i) == 'ê' || word.charAt(i) == 'ë' || word.charAt(i) == 'à' || word.charAt(i) == 'â' || word.charAt(i) == 'ä' || word.charAt(i) == 'î' || word.charAt(i) == 'ï' || word.charAt(i) == 'ô' || word.charAt(i) == 'ö' || word.charAt(i) == 'ù' || word.charAt(i) == 'û' || word.charAt(i) == 'ü' || word.charAt(i) == 'ç' || word.charAt(i) == 'ÿ' || word.charAt(i) == 'ñ'){
-					//on remplace l'accent par la lettre correspondante
-
-					if (word.charAt(i) == 'é'){
-						String new_word = word.replace("é","é");
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'è'){
-						String new_word = word.replace('è','e');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ê'){
-						String new_word = word.replace('ê','e');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ë'){
-						String new_word = word.replace('ë','e');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'à'){
-						String new_word = word.replace('à','a');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'â'){
-						String new_word = word.replace('â','a');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ä'){
-						String new_word = word.replace('ä','a');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'î'){
-						String new_word = word.replace('î','i');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ï'){
-						String new_word = word.replace('ï','i');
-						separate_words[x] = new_word;
-
-					}
-					else if (word.charAt(i) == 'ô'){
-						String new_word = word.replace('ô','o');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ö'){
-						String new_word = word.replace('ö','o');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ù'){
-						String new_word = word.replace('ù','u');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'û'){
-						String new_word = word.replace('û','u');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ü'){
-						String new_word = word.replace('ü','u');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ç'){
-						String new_word = word.replace('ç','c');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ÿ'){
-						String new_word = word.replace('ÿ','y');
-						separate_words[x] = new_word;
-					}
-					else if (word.charAt(i) == 'ñ'){
-						String new_word = word.replace('ñ','n');
-						separate_words[x] = new_word;
-					}
-				}
-				else{
-					separate_words[x] = word;
-				}
-			}
-			x++;
-		}
-		for (String word : separate_words){
-			chaineSansAccents += word + " ";
-		}
-		return chaineSansAccents;
-	}
     //Fonction pour enlever tous les caractères n'étant pas des lettres
     public static String removeSpecialCharacters(String chaine) throws IOException {
 		String[] separate_words = chaine.split(" "); 
         String chaineSansCaracteresSpeciaux = "";    
-		boolean contains_dash = false;
-		int x=0;
 		//pour tous les mots dans la chaîne de carractere
-		for (String word : separate_words){
-			for (int i = 0; i < word.length(); i++){
-				if (word.charAt(i) == '-'){
-					contains_dash = true;
-					if (contains_dash == true){
-						String new_word = word.replace('-',' ');
-						separate_words[x] = new_word;
-					}
-					else{
-						separate_words[x] = word;
-					}
-				}	
-			}
-			x++;
-		}
+		
 		chaine = String.join(" ",separate_words);
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une apostrophe ou des guillemets, on le remplace par un espace
@@ -347,14 +239,25 @@ public class SearchEngine
         for(int i = 0; i < chaineTableau.length; i++) {
             // On regarde si le mot est dans la hashmap avec la fonction get
             String lemma = lemmaDict.get(chaineTableau[i]);
+
             // Si c'est le cas on ajoute le mot lemmatisé et un espace à la suite
             if (lemma != null) {
+				
                 chaineLemmatise += lemma + " ";
             }
-            // Sinon on ajoute le mot inchangé et un espace à la suite
-            else {
-                chaineLemmatise += chaineTableau[i] + " ";
-            }
+            // Sinon on ajoute le mot inchangé et un espace à la suite, et on split le mot en deux si il y a un -
+			else 
+			{
+				if(chaineTableau[i].contains("-"))
+				{
+					String[] separate_words = chaineTableau[i].split("-"); 
+					chaineLemmatise += separate_words[0] + " " + separate_words[1] + " ";
+				}
+				else
+				{
+					chaineLemmatise += chaineTableau[i] + " ";
+				}
+			}
         }
         return chaineLemmatise;
     }
