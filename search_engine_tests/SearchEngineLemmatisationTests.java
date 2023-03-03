@@ -8,7 +8,7 @@ public class SearchEngineLemmatisationTests{
     public static void main(String[] args) throws Exception
     {
        
-        String chaineNormal = "aujourd'hui Bonjour j'adore coder en JAVA! car c'est pas mal, et peut-elle que : je vais faire un projet avec ça.";
+        String chaineNormal = "salut-salut ééééééééééé vociférera aujourd'hui vociférera Bonjour yacht-club j'adore coder en JAVA! car c'est pas mal, et peut-elle que : je vais faire un projet avec ça.";
         String chaineModif = testFonctions(chaineNormal);
     }
 
@@ -17,14 +17,18 @@ public class SearchEngineLemmatisationTests{
         System.out.println("Chaine de base : \n" + chainetexte + "\n");
         chainetexte = SearchEngine.lowercase(chainetexte);
         System.out.println("Chaine en minuscule : \n"+chainetexte +"\n");
+        chainetexte = SearchEngine.replaceBadAccents(chainetexte);
+        System.out.println("Chaine avec accents modifiés (+ modifs précédentes): \n"+chainetexte + "\n");
+        chainetexte =SearchEngine.lemmatize(chainetexte);
+        System.out.println("Chaine lemmatisée (+ modifs précédentes): \n"+chainetexte + "\n");
         chainetexte = SearchEngine.removeSpecialCharacters(chainetexte);
         System.out.println("Chaine sans caractères spéciaux (+ modifs précédentes): \n"+chainetexte+ "\n");
         chainetexte = SearchEngine.removeWordsBlackList(chainetexte);
         System.out.println("Chaine sans mots de la liste noire (+ modifs précédentes): \n"+chainetexte+ "\n");
-        chainetexte =SearchEngine.lemmatize(chainetexte);
-        System.out.println("Chaine lemmatisée (+ modifs précédentes): \n"+chainetexte + "\n");
         chainetexte = SearchEngine.removeSmallWords(chainetexte);
         System.out.println("Chaine sans mots de 1 et 2 lettres (+ modifs précédentes): \n"+chainetexte+ "\n");
+        chainetexte =SearchEngine.lemmatize(chainetexte);
+        System.out.println("Chaine lemmatisée (+ modifs précédentes): \n"+chainetexte + "\n");
         return chainetexte;
     }
 

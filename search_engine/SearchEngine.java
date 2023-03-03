@@ -174,44 +174,117 @@ public class SearchEngine
         return chaineMinuscule;
     }
 
+	public static String replaceBadAccents(String chaine) throws IOException {	
+		String[] separate_words = chaine.split(" ");
+		String chaineSansAccents = "";
+		int x=0;
+		//pour tous les mots dans la chaîne de carractere
+		for (String word : separate_words){
+			for (int i = 0; i < word.length(); i++){
+				//si le caractère est un accent
+				if (word.charAt(i) == 'é' || word.charAt(i) == 'è' || word.charAt(i) == 'ê' || word.charAt(i) == 'ë' || word.charAt(i) == 'à' || word.charAt(i) == 'â' || word.charAt(i) == 'ä' || word.charAt(i) == 'î' || word.charAt(i) == 'ï' || word.charAt(i) == 'ô' || word.charAt(i) == 'ö' || word.charAt(i) == 'ù' || word.charAt(i) == 'û' || word.charAt(i) == 'ü' || word.charAt(i) == 'ç' || word.charAt(i) == 'ÿ' || word.charAt(i) == 'ñ'){
+					//on remplace l'accent par la lettre correspondante
 
+					if (word.charAt(i) == 'é'){
+						String new_word = word.replace("é","é");
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'è'){
+						String new_word = word.replace('è','e');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ê'){
+						String new_word = word.replace('ê','e');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ë'){
+						String new_word = word.replace('ë','e');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'à'){
+						String new_word = word.replace('à','a');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'â'){
+						String new_word = word.replace('â','a');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ä'){
+						String new_word = word.replace('ä','a');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'î'){
+						String new_word = word.replace('î','i');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ï'){
+						String new_word = word.replace('ï','i');
+						separate_words[x] = new_word;
+
+					}
+					else if (word.charAt(i) == 'ô'){
+						String new_word = word.replace('ô','o');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ö'){
+						String new_word = word.replace('ö','o');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ù'){
+						String new_word = word.replace('ù','u');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'û'){
+						String new_word = word.replace('û','u');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ü'){
+						String new_word = word.replace('ü','u');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ç'){
+						String new_word = word.replace('ç','c');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ÿ'){
+						String new_word = word.replace('ÿ','y');
+						separate_words[x] = new_word;
+					}
+					else if (word.charAt(i) == 'ñ'){
+						String new_word = word.replace('ñ','n');
+						separate_words[x] = new_word;
+					}
+				}
+				else{
+					separate_words[x] = word;
+				}
+			}
+			x++;
+		}
+		for (String word : separate_words){
+			chaineSansAccents += word + " ";
+		}
+		return chaineSansAccents;
+	}
     //Fonction pour enlever tous les caractères n'étant pas des lettres
     public static String removeSpecialCharacters(String chaine) throws IOException {
 		String[] separate_words = chaine.split(" "); 
         String chaineSansCaracteresSpeciaux = "";    
 		boolean contains_dash = false;
-		boolean find = false;
 		int x=0;
 		//pour tous les mots dans la chaîne de carractere
 		for (String word : separate_words){
 			for (int i = 0; i < word.length(); i++){
 				if (word.charAt(i) == '-'){
 					contains_dash = true;
-				}	
-			}
-			if (contains_dash == true ){
-				String dictPath = "txt/dictiofr.txt";
-				// On crée la hashmap
-				Map<String, String> lemmaDict = new HashMap<>();
-				// On lit le fichier dictiofr.txt ligne par ligne
-				for (String line : Files.readAllLines(Paths.get(dictPath), StandardCharsets.UTF_8)) {
-					// On split chaque ligne en deux séparées les ":" puis on ajoute le mot et sa lemmatisation dans
-					// la hashmap
-					String[] dictSplit = line.split(":");
-					lemmaDict.put(dictSplit[0], dictSplit[1]);
-				}
-				for(int i = 0; i < separate_words.length; i++) {
-					// On regade si le mot word est dans le dictionnaire
-					//String lemma = lemmaDict.get(chaineTableau[i]);
-					if (lemmaDict.containsKey(word)){
-						find = true;
+					if (contains_dash == true){
+						String new_word = word.replace('-',' ');
+						separate_words[x] = new_word;
 					}
-					
-				}
-				if (find == false){ //si le mot contenant le '-' n'est pas dans le dico alors on remplace le ' ' par un espace
-					String new_word = word.replace('-',' ');
-					separate_words[x] = new_word;
-				}
+					else{
+						separate_words[x] = word;
+					}
+				}	
 			}
 			x++;
 		}
