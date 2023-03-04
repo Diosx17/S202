@@ -6,9 +6,19 @@ public class SearchEngineLemmatisationTests{
 
     public static void main(String[] args) throws Exception
     {
-       
-        String chaineNormal = "adjudants-chefs abat-jour salut-salut ééééééééééé vociférera aujourd'hui vociférera Bonjour yacht-club j'adore coder en JAVA! car c'est pas mal, et peut-elle que : je vais faire un projet avec ça.";
+        /*
+         * Les tests sont effectués sur la chaine de caractères suivante :
+         * - 1 on met les mots en minuscule
+         * - 2 on enlève les caractères spéciaux
+         * - 3 on enlève les mots de la liste noire
+         * - 4 on enlève les mots de 1 et 2 lettres
+         * - 5 on lemmatise et dans cette lemmatisation on verifie le cas ou un mot avec tiret 
+         * possede une partie gauche ou droite qui n'existe pas dans le dictionnaire
+        
+         */
+        String chaineNormal = "salut-boui adjudants-chefs abat-jour salut-salut vociférera aujourd'hui vociférera Bonjour yacht-club j'adore coder en JAVA! car c'est pas mal, et peut-elle que : je vais faire un projet avec ça.";
         String chaineModif = testFonctions(chaineNormal);
+        System.out.println(chaineModif);
     }
 
     public static String testFonctions(String chainetexte) throws Exception
