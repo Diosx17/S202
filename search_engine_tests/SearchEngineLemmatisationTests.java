@@ -12,13 +12,13 @@ public class SearchEngineLemmatisationTests{
          * - 2 on enlève les caractères spéciaux
          * - 3 on enlève les mots de la liste noire
          * - 4 on enlève les mots de 1 et 2 lettres
-         * - 5 on lemmatise et dans cette lemmatisation on verifie le cas ou un mot avec tiret 
-         * possede une partie gauche ou droite qui n'existe pas dans le dictionnaire et si c'est le cas on supprime le mot inexistant
+         * - 5 on lemmatise la chaine en associant à chaque mot son lemme, si un mot contient un tiret après la lemmatisation,
+         *  cela signifie qu'aucun lemme ne correspond à ce mot et donc nous séparons celui-ci en deux mots distincts (suppresion du tiret)
         
          */
-        String chaineNormal = "salut-boui boui-boui adjudants-chefs abat-jour salut-salut vociférera aujourd'hui vociférera Bonjour yacht-club j'adore coder en JAVA! car c'est pas mal, et peut-elle que : je vais faire un projet avec ça.";
+        String chaineNormal = "salut-boui abaisse-langue adjudants-chefs abat-jour salut-salut vociférera Bonjour yacht-club j'adore coder en JAVA! car c'est pas mal, et peut-elle que : je vais faire un projet avec ça.";
         String chaineModif = testFonctions(chaineNormal);
-        System.out.println(chaineModif);
+        System.out.println("Voici la chaine finale :\n" + chaineModif + "\n");
     }
 
     public static String testFonctions(String chainetexte) throws Exception

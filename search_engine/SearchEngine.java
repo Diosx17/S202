@@ -110,16 +110,16 @@ public class SearchEngine
 		listeDuHashmap.sort(Map.Entry.comparingByValue(Comparator.reverseOrder())); // on trie la liste par ordre decroissant
 		
 		
-		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste trie, il faut qu'elle soit de type LinkedHashMap car elle garde l'ordre d'insertion
+		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste triee, il faut qu'elle soit de type LinkedHashMap car elle garde l'ordre d'insertion
 		for (Map.Entry<String, Double> entry : listeDuHashmap) // on ajoute les elements de la liste trie a la hashmap
 		{
 			sortedContainer.put(entry.getKey(), entry.getValue());
 		}
 		
 	
-		SearchResult[] results = new SearchResult[sortedContainer.size()]; // on cree un tableau de SearchResult qui va contenir les elements de la hashmap trie
+		SearchResult[] results = new SearchResult[sortedContainer.size()]; // on cree un tableau de SearchResult qui va contenir les elements de la hashmap triee
 		int i = 0;
-		for (Map.Entry<String, Double> MapEntree : sortedContainer.entrySet())  // on ajoute les elements de la hashmap trie au tableau de SearchResult
+		for (Map.Entry<String, Double> MapEntree : sortedContainer.entrySet())  // on ajoute les elements de la hashmap triee au tableau de SearchResult
 		{
 			results[i] = new SearchResult(MapEntree.getKey(), MapEntree.getValue());
 			i++;
@@ -175,19 +175,15 @@ public class SearchEngine
     }
 
     //Fonction pour enlever tous les caractères n'étant pas des lettres
-    public static String removeSpecialCharacters(String chaine) throws IOException {
-		String[] separate_words = chaine.split(" "); 
+    public static String removeSpecialCharacters(String chaine) throws IOException { 
         String chaineSansCaracteresSpeciaux = "";    
-		//pour tous les mots dans la chaîne de carractere
-		
-		chaine = String.join(" ",separate_words);
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une apostrophe ou des guillemets, on le remplace par un espace
             if (chaine.charAt(i) == '\'' || chaine.charAt(i) == '"' || chaine.charAt(i) == '’')
 			{
                 chaineSansCaracteresSpeciaux += " ";
             }
-            //si le caractère est une lettre ou un espace ou un - on l'ajoute a la chaine
+            //si le caractère est une lettre ou un espace ou un - on l'ajoute a la chaine (nous traiterons les '-' par la suite)
             else if (Character.isLetter(chaine.charAt(i)) || chaine.charAt(i) == ' ' || chaine.charAt(i) == '-') {
                 chaineSansCaracteresSpeciaux += chaine.charAt(i);
             }
@@ -202,6 +198,7 @@ public class SearchEngine
         String[] listeNoireTableau = listeNoire.split(" ");
         String[] chaineTableau = chaine.split(" ");
         String chaineSansMotsListeNoire = "";
+		//on ajoute seulement les mots qui ne sont pas dans la liste noire
         for (int i = 0; i < chaineTableau.length; i++) {
             if (!Arrays.asList(listeNoireTableau).contains(chaineTableau[i])) {
                 chaineSansMotsListeNoire += chaineTableau[i] + " ";
@@ -214,6 +211,7 @@ public class SearchEngine
     public static String removeSmallWords(String chaine) {
         String[] chaineTableau = chaine.split(" ");
         String chaineSansMotsPetits = "";
+		//on ajoute seulement les mots ayant une longueur superieure à 2
         for (int i = 0; i < chaineTableau.length; i++) {
             if (chaineTableau[i].length() > 2) {
                 chaineSansMotsPetits += chaineTableau[i] + " ";
