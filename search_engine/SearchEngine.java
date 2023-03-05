@@ -251,23 +251,7 @@ public class SearchEngine
 				if(chaineTableau[i].contains("-"))
 				{
 					String[] separate_words = chaineTableau[i].split("-"); 
-					if(lemmaDict.get(separate_words[0]) != null)
-					{
-						chaineLemmatise += lemmaDict.get(separate_words[0]) + " ";
-					}
-					else
-					{
-						chaineLemmatise += "";
-					}
-
-					if(lemmaDict.get(separate_words[1]) != null)
-					{
-						chaineLemmatise += lemmaDict.get(separate_words[1]) + " ";
-					}
-					else
-					{
-						chaineLemmatise += "";
-					}
+					chaineLemmatise += separate_words[0] + " " + separate_words[1] + " ";
 				}
 				else
 				{
