@@ -60,7 +60,7 @@ public class SearchEngine
 		
 	}
 
-	public SearchEngine(Path indexation_directory)
+	public SearchEngine(Path indexation_directory) 
 	{
 		this.indexation_directory=indexation_directory;
 		this.pages = new IndexedPage[indexation_directory.toFile().listFiles().length];
