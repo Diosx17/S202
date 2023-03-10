@@ -1,0 +1,74 @@
+html{
+	scroll-behavior: smooth;
+}
+
+*{
+	margin-left:0;
+	margin-right:0;
+	padding:0;
+    box-sizing: border-box;
+}
+
+nav{
+    width: 100%;
+    margin-top: -10px;
+    position:fixed;
+    background-color: white;
+    border-bottom: 1px solid #000000;
+    z-index:1;
+    background-color: rebeccapurple;
+}
+#logo{
+	height: 50px;
+	width: auto;
+	float:left;
+	margin-left: 2%;
+    margin-top: 5px;
+}
+
+/*on centre la balise input au centre de la page que ce soit horizontalement */
+input[type="text"] {
+
+    /*on arrondit les bords*/
+    border-radius: 50px;
+    width: 35%;
+    height: 40px;
+    margin-top: 20%;
+    margin-left: 32.5%;
+    margin-right: 32.5%;
+
+    background-color: #f3f1f1;
+    border: 1px solid #989797;
+    color: #6b6868;
+    font-size: 16px;
+    padding: 15px 25px;
+}
+
+input[type="text"]:focus {
+    background-color: rgb(255, 255, 255);
+}
+
+table {
+    width: 50%;
+    margin: 100px auto;
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid black;
+    text-align: center;
+    opacity: 0;
+    animation: apparition 5s;
+    padding: 20px;
+}
+
+.reveal{
+    position: relative;
+    opacity: 0;
+    transition: all 1s ease;
+    transform: translateY(250px);
+}
+
+.reveal.active{
+    opacity: 1;
+    transform: translateY(0px);
+}
