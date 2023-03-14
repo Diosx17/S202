@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -20,8 +21,10 @@ public class SearchEngine
 	private Path indexation_directory;
 	private IndexedPage[] pages;
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception 
 	{
+		System.setProperty("file.encoding", "UTF-8");
+
 		switch (args.length) {
 
 			case 0:
@@ -107,16 +110,16 @@ public class SearchEngine
 		listeDuHashmap.sort(Map.Entry.comparingByValue(Comparator.reverseOrder())); // on trie la liste par ordre decroissant
 		
 		
-		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste trie, il faut qu'elle soit de type LinkedHashMap car elle garde l'ordre d'insertion
+		HashMap<String, Double> sortedContainer = new LinkedHashMap<>(); // on cree une nouvelle hashmap qui va contenir les elements de la liste triee, il faut qu'elle soit de type LinkedHashMap car elle garde l'ordre d'insertion
 		for (Map.Entry<String, Double> entry : listeDuHashmap) // on ajoute les elements de la liste trie a la hashmap
 		{
 			sortedContainer.put(entry.getKey(), entry.getValue());
 		}
 		
 	
-		SearchResult[] results = new SearchResult[sortedContainer.size()]; // on cree un tableau de SearchResult qui va contenir les elements de la hashmap trie
+		SearchResult[] results = new SearchResult[sortedContainer.size()]; // on cree un tableau de SearchResult qui va contenir les elements de la hashmap triee
 		int i = 0;
-		for (Map.Entry<String, Double> MapEntree : sortedContainer.entrySet())  // on ajoute les elements de la hashmap trie au tableau de SearchResult
+		for (Map.Entry<String, Double> MapEntree : sortedContainer.entrySet())  // on ajoute les elements de la hashmap triee au tableau de SearchResult
 		{
 			results[i] = new SearchResult(MapEntree.getKey(), MapEntree.getValue());
 			i++;
@@ -149,7 +152,7 @@ public class SearchEngine
 		
 	}
 	//LectureFichier
-    public static String lire(String nomFichier) throws Exception {
+    public static String read(String nomFichier) throws Exception {
         String contenu = "";
         File fichier = new File(nomFichier);
         Scanner lecteur = new Scanner(fichier);
@@ -162,7 +165,7 @@ public class SearchEngine
     }
 
     //majuscule en minuscule
-    public static String minuscule(String chaine) {
+    public static String lowercase(String chaine) {
         String chaineMinuscule = "";
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une majuscule on le transforme en minuscule
@@ -172,15 +175,16 @@ public class SearchEngine
     }
 
     //Fonction pour enlever tous les caractères n'étant pas des lettres
-    public static String enleverCaracteresSpeciaux(String chaine) {
-        String chaineSansCaracteresSpeciaux = "";
+    public static String removeSpecialCharacters(String chaine) throws IOException { 
+        String chaineSansCaracteresSpeciaux = "";    
         for (int i = 0; i < chaine.length(); i++) {
             //si le caractère est une apostrophe ou des guillemets, on le remplace par un espace
-            if (chaine.charAt(i) == '\'' || chaine.charAt(i) == '"' || chaine.charAt(i) == '’') {
+            if (chaine.charAt(i) == '\'' || chaine.charAt(i) == '"' || chaine.charAt(i) == '’')
+			{
                 chaineSansCaracteresSpeciaux += " ";
             }
-            //si le caractère est une lettre ou un espace on l'ajoute a la chaine
-            else if (Character.isLetter(chaine.charAt(i)) || chaine.charAt(i) == ' ') {
+            //si le caractère est une lettre ou un espace ou un - on l'ajoute a la chaine (nous traiterons les '-' par la suite)
+            else if (Character.isLetter(chaine.charAt(i)) || chaine.charAt(i) == ' ' || chaine.charAt(i) == '-') {
                 chaineSansCaracteresSpeciaux += chaine.charAt(i);
             }
         }
@@ -188,12 +192,13 @@ public class SearchEngine
     }
 
     //Fonction permettant d'enlever les mots qui appartiennent à ListeNoire.txt
-    public static String enleverMotsListeNoire(String chaine) throws Exception {
-        String listeNoire = lire("./txt/ListeNoire.txt");
-        listeNoire = enleverCaracteresSpeciaux(listeNoire);
+    public static String removeWordsBlackList(String chaine) throws Exception {
+        String listeNoire = read("./txt/blacklist.txt");
+        listeNoire = removeSpecialCharacters(listeNoire);
         String[] listeNoireTableau = listeNoire.split(" ");
         String[] chaineTableau = chaine.split(" ");
         String chaineSansMotsListeNoire = "";
+		//on ajoute seulement les mots qui ne sont pas dans la liste noire
         for (int i = 0; i < chaineTableau.length; i++) {
             if (!Arrays.asList(listeNoireTableau).contains(chaineTableau[i])) {
                 chaineSansMotsListeNoire += chaineTableau[i] + " ";
@@ -203,9 +208,10 @@ public class SearchEngine
     }
 
     //enlever mot de 1 et 2 lettres
-    public static String enleverMotsPetits(String chaine) {
+    public static String removeSmallWords(String chaine) {
         String[] chaineTableau = chaine.split(" ");
         String chaineSansMotsPetits = "";
+		//on ajoute seulement les mots ayant une longueur superieure à 2
         for (int i = 0; i < chaineTableau.length; i++) {
             if (chaineTableau[i].length() > 2) {
                 chaineSansMotsPetits += chaineTableau[i] + " ";
@@ -214,9 +220,9 @@ public class SearchEngine
         return chaineSansMotsPetits;
     }
 
-    //lemmatise
-    public static String lemmatise(String chaine) throws Exception {
-        String dictPath = "./txt/dictiofr.txt";
+    //lemmatize
+    public static String lemmatize(String chaine) throws Exception {
+        String dictPath = "txt/dictiofr.txt";
         // On crée la hashmap
         Map<String, String> lemmaDict = new HashMap<>();
         // On lit le fichier dictiofr.txt ligne par ligne
@@ -227,22 +233,32 @@ public class SearchEngine
             lemmaDict.put(dictSplit[0], dictSplit[1]);
         }
         String[] chaineTableau = chaine.split(" ");
-        String chaineLemmatisée = "";
+        String chaineLemmatise = "";
         for(int i = 0; i < chaineTableau.length; i++) {
             // On regarde si le mot est dans la hashmap avec la fonction get
             String lemma = lemmaDict.get(chaineTableau[i]);
+
             // Si c'est le cas on ajoute le mot lemmatisé et un espace à la suite
             if (lemma != null) {
-                chaineLemmatisée += lemma + " ";
+				
+                chaineLemmatise += lemma + " ";
             }
-            // Sinon on ajoute le mot inchangé et un espace à la suite
-            else {
-                chaineLemmatisée += chaineTableau[i] + " ";
-            }
+            // Sinon on ajoute le mot inchangé et un espace à la suite, et on split le mot en deux si il y a un -
+			else 
+			{
+				if(chaineTableau[i].contains("-"))
+				{
+					String[] separate_words = chaineTableau[i].split("-"); 
+					chaineLemmatise += separate_words[0] + " " + separate_words[1] + " ";
+				}
+				else
+				{
+					chaineLemmatise += chaineTableau[i] + " ";
+				}
+			}
         }
-        return chaineLemmatisée;
+        return chaineLemmatise;
     }
-
 	
 	
 }
