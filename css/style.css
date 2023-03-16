@@ -2,6 +2,10 @@ html{
 	scroll-behavior: smooth;
 }
 
+body{
+    height: 100%;
+}
+
 *{
 	margin-left:0;
 	margin-right:0;
@@ -12,12 +16,12 @@ html{
 nav{
     width: 100%;
     margin-top: -10px;
-    position:fixed;
-    background-color: white;
     border-bottom: 1px solid #000000;
     z-index:1;
     background-color: rebeccapurple;
+    height: 55px;
 }
+
 #logo{
 	height: 50px;
 	width: auto;
@@ -26,34 +30,52 @@ nav{
     margin-top: 5px;
 }
 
-/*on centre la balise input au centre de la page que ce soit horizontalement */
-input[type="text"] {
 
-    /*on arrondit les bords*/
-    border-radius: 50px;
+/*style pour la barre de recherche*/
+
+.search-box{
+    margin-top: 200px;
+    align-items: center;
     width: 35%;
-    height: 40px;
-    margin-top: 20%;
     margin-left: 32.5%;
     margin-right: 32.5%;
-
-    background-color: #f3f1f1;
-    border: 1px solid #989797;
-    color: #6b6868;
-    font-size: 16px;
-    padding: 15px 25px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 50px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12vh;
 }
 
-input[type="text"]:focus {
-    background-color: rgb(255, 255, 255);
+.search-box input[type="text"]{
+    flex: 1;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    background-color: transparent;
+    outline: none;
 }
 
-table {
+.search-box button[type="submit"]{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.search-box button i{
+    font-size: 25px;
+    color: #2d2c2c;
+    margin-right: 2vw;
+}
+
+table{
     width: 50%;
     margin: 100px auto;
     border-collapse: collapse;
 }
-td {
+
+td{
     border: 1px solid black;
     text-align: center;
     opacity: 0;
@@ -66,9 +88,76 @@ td {
     opacity: 0;
     transition: all 1s ease;
     transform: translateY(250px);
+    pointer-events: none;
 }
 
 .reveal.active{
     opacity: 1;
     transform: translateY(0px);
+    pointer-events: auto;
 }
+/*
+.img-test{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 50%;
+    align-items: center;
+}
+
+.img-test img{
+    margin-bottom: 10px;
+}
+*/
+/*
+.search-box input:focus {
+    border-color: #4d90fe;
+    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+}*/
+
+  
+.rectangle{
+    width: 75%;
+    height: 250px;
+    margin-right: 12.5%;
+    margin-left: 12.5%;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    /*
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    border: 2px solid #ccc;
+    */
+    border-color: #4d90fe;
+    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+}
+  
+.rectangle img{
+    width: 45%;
+    height: 100%;
+    margin-right: 20px;
+    border-radius: 10px;
+    float: left;
+    margin-top: auto;
+    
+}
+
+.rectangle .article-content{
+    width: 65%;
+    height: 100%;
+    margin-left: 50%;
+    margin-top: auto;
+}
+  
+.article-content a{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+  
