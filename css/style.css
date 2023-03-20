@@ -1,5 +1,6 @@
 html{
 	scroll-behavior: smooth;
+    background-color: #5C97FF;
 }
 
 body{
@@ -16,36 +17,36 @@ body{
 nav{
     width: 100%;
     margin-top: -10px;
-    border-bottom: 1px solid #000000;
+    /*border-bottom: 1px solid #000000;*/
     z-index:1;
-    background-color: rebeccapurple;
+    /*background-color: rebeccapurple;*/
     height: 55px;
 }
 
-#logo{
-	height: 50px;
-	width: auto;
-	float:left;
-	margin-left: 2%;
-    margin-top: 5px;
+#logo { 
+    position: absolute;
+    left: 50%;
+    width: 250px;
+    transform: translateX(-50%);
+    top: 75px; 
 }
 
 
 /*style pour la barre de recherche*/
 
-.search-box{
-    margin-top: 200px;
+.search-box { /*nouvelle position de la barre de recherche*/
+    margin-top: 220px;
     align-items: center;
     width: 35%;
     margin-left: 32.5%;
     margin-right: 32.5%;
-    padding: 15px;
+    padding: 8px;
     background-color: #f8f8f8;
     border-radius: 50px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12vh;
+    margin-bottom: 4vh;
 }
 
 .search-box input[type="text"]{
@@ -160,4 +161,65 @@ td{
     border-radius: 5px;
     text-decoration: none;
 }
-  
+
+.bloc-historique{
+    align-items: center;
+    width: 35%;
+    height: 50px;
+    margin-left: 32.5%;
+    margin-right: 32.5%;
+
+    justify-content: space-between;
+    margin-bottom: 12vh;
+    display:grid;
+    grid-template-columns: 16% 16% 16% 16% 16% 16%;
+
+}
+
+.bloc-historique .icone{
+    width: 40px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-left: 32.5px;
+
+}
+@media screen and (max-width:1500px){
+    .bloc-historique .icone{
+        margin-left: 0;
+    }
+}
+
+.random-article{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    justify-content: space-between;
+    margin-bottom: 12vh;
+    display:grid;
+    grid-template-columns: 25% 25% 25%;
+
+}
+
+.random-article .article{
+    width: 100%;
+    
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    border-color: #4d90fe;
+    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+}
+
+.random-article .article img{
+    width: 100%;
+}
+
+
+#corps{
+    padding-top: 100px;
+    background-color: white;
+    border-radius: 50px;
+}

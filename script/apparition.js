@@ -7,9 +7,9 @@ window.addEventListener('load', function() {
         reveal.classList.add('active');
     });
 
-    window.addEventListener('scroll', revealOnScroll);
+   window.addEventListener('scroll', revealOnScroll);
 
-    function revealOnScroll(){
+   function revealOnScroll(){
         var reveals = document.querySelectorAll('.reveal');
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
