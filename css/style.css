@@ -1,6 +1,11 @@
 html{
 	scroll-behavior: smooth;
-    background-color: #5C97FF;
+    background-color: var(--background); /*#bdd5ff*/
+}
+
+:root {
+    --background: #5C97FF;
+    --test : yellow;
 }
 
 body{
@@ -23,8 +28,8 @@ nav{
     height: 55px;
 }
 .navigation.active{
-    background-color: #5C97FF;
-    position: fixed;
+    background-color: var(--background);
+    position: fixed;    
     top: 0;
     left: 0;
     right: 0;
@@ -34,10 +39,10 @@ nav{
 
 #logo { 
     position: absolute;
-    left: 50%;
+    left: 48%;
     width: 250px;
     transform: translateX(-50%);
-    top: 75px; 
+    top: 125px; 
 }
 
 /* Andy ------------------------------------------------*/
@@ -100,7 +105,7 @@ input[type="checkbox"]{
 }
 
 /*barre de recherche qui passe au dessus au scroll*/
-.search-box.fixed {
+/*.search-box.fixed {
     position: fixed;
     top: 10px;
     left: 100px;
@@ -108,7 +113,7 @@ input[type="checkbox"]{
     margin: 0; 
     border-radius: 50px;
     z-index: 3;
-  }
+  }*/ 
 
 .search-box input[type="text"]{
     flex: 1;
@@ -178,7 +183,52 @@ td{
     border-color: #4d90fe;
     box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
 }*/
+#notreselect{
+    margin-top: 0px;
+    font-size: 2rem;
+    margin-left: 3%;
+    opacity: 0;
+    animation: appear 3s ease-in-out forwards;
+    position: relative;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+}
 
+#notreselect.suppr{
+    display: none;
+}
+      
+@keyframes appear {
+from {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+  
+#notreselect::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rebeccapurple;
+    transition: width 0.3s ease-in-out;
+}
+
+#notreselect::first-letter{
+    color: rebeccapurple;
+}
+
+#notreselect:hover::before {
+    width: 100%;
+}
   
 .rectangle{
     width: 75%;
@@ -204,6 +254,11 @@ td{
 
 .find-items.active{
     display: block;
+    margin-top: 75px;
+}
+
+.find-items .rectangle:first-child{
+    background-color: #bdd5ff;
 }
   
 .rectangle img{
@@ -220,13 +275,12 @@ td{
 }
 
 .rectangle .article-content p{
-    margin-right: 200px;
+    margin-right:  150px;
 }
 
 .rectangle .article-content{
     width: 65%;
     height: 100%;
-    margin-right: 50%;
     margin-top: auto;
 }
 
@@ -236,9 +290,14 @@ td{
     justify-content: space-between;
 }
 
-.random-article .article .article-content h2, a, p {
-    flex-basis: 30%;
-  }
+.random-article .article p{
+    color: #202020;
+    font-family: BrownBold,sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+
+    width: 100%;
+}
 
 
 .rectangle .article-content a{
@@ -289,8 +348,8 @@ td{
 .article {
   width: 28%;
   margin: auto;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
+  /*background-color: #f2f2f2;
+  border: 1px solid #ccc;*/
   box-sizing: border-box;
   text-align: center;
   margin-bottom: 20px;
@@ -307,19 +366,23 @@ td{
 
 
 #corps{
-    padding-top: 100px;
+    padding-top: 60px;
     background-color: white;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
+    /*border-top-right-radius: 25px;
+    border-top-left-radius: 25px;*/
     padding-bottom: 25px;
     margin-bottom: -20px;
 
 }
 
 
-.article:hover{
+.article:hover, .rectangle:hover{
     transform: scale(1.05);
     transition: 0.5s;
+}
+
+.article, .rectangle{
+    transition: transform 0.3s ease-in;
 }
 
 
@@ -328,6 +391,23 @@ td{
     top: 10px;
     left: 100px;
     width: 35%; 
+    margin: 0;
+    border-radius: 50px;
+    transition: all 0.5s ease;
+    z-index: 3;
+}
+
+.rectangle:first-child.active {
+    margin-top: 100px; 
+}
+
+
+.bloc-historique.suppr{
+    display: none;
+}
+
+.random-article.suppr{
+    display: none;
     margin: 0;
     border-radius: 50px;
     transition: all 0.5s ease;
@@ -344,18 +424,4 @@ td{
     margin: 0;
     z-index: 10;
     transition: all 0.5s ease;
-}
-
-
-.rectangle:first-child.active {
-    margin-top: 100px; 
-}
-
-
-.bloc-historique.suppr{
-    display: none;
-}
-
-.random-article.suppr{
-    display: none;
 }

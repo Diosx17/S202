@@ -7,6 +7,7 @@ window.addEventListener('load', function () {
     var blochistorique = document.querySelector('.bloc-historique');
     var nav = document.querySelector('.navigation');
     var finditems = document.querySelector('.find-items');
+    var ns = document.querySelector('#notreselect');
 
     searchButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -17,6 +18,7 @@ window.addEventListener('load', function () {
         blochistorique.classList.add('suppr');
         nav.classList.add('active');
         finditems.classList.add('active');
+        ns.classList.add('suppr');
     });
 
     //  Andy ------------------------------------------------------------
@@ -35,7 +37,7 @@ window.addEventListener('load', function () {
     // fin Andy -----------------------------------------------------------
     
     //à continuer c'est pour la barre de recherche qui se met en haut quand on scroll
-    const searchBar = document.querySelector('.search-box');
+    /*const searchBar = document.querySelector('.search-box');
 
     window.addEventListener('scroll', () => {
     if (window.scrollY > searchBar.offsetTop) {
@@ -43,7 +45,7 @@ window.addEventListener('load', function () {
     } else {
         searchBar.classList.remove('fixed');
     }
-    });
+    });*/
 
 
     window.addEventListener('scroll', revealOnScroll);
@@ -63,4 +65,28 @@ window.addEventListener('load', function () {
         }
     }
 });
+
+/*pour faire deux css différents : l'un pour le mode sombre et l'autre pour le mode clair
+
+// Récupérez la balise <link> de la feuille de style
+var styleSheet = document.getElementById('css/style.css');
+
+// Fonction pour changer la feuille de style
+function swapStyleSheet(sheet){
+    styleSheet.setAttribute('href', sheet);
+}
+
+// Événement pour activer le mode nuit
+document.getElementById('night-mode').addEventListener('click', function(){
+    swapStyleSheet('night.css');
+});
+
+// Événement pour désactiver le mode nuit
+document.getElementById('day-mode').addEventListener('click', function(){
+    swapStyleSheet('day.css');
+});
+*/
+
+
+
 
