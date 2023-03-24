@@ -105,7 +105,7 @@
       
       if(isset($_POST['q']))
       {
-        $cmd = $exe_path . '' . $_POST['q'];
+        $cmd = $exe_path;
         $output = shell_exec($cmd);
 
         $array_output = explode("\n", $output);
