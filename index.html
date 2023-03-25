@@ -13,16 +13,17 @@
   
   <header>
     <nav class="navigation">
-      <a><img src="img/vikidia.png" id="logo"></a>
+      <a><img src="img/vikidia.png" alt="logo vikidia" id="logo"></a>
         <!-- Andy --------------------------------------------------------->
-        <label for="infobulle">
-          <a><img src="img/unnamed.png" id="param" /></a>
+        <input type="checkbox" id="mode-switch">
+        <label for="mode-switch" class="mode-switch-label">
+          <span class="mode-switch-icon"></span>
         </label>
     </nav>
     <input type="checkbox" id="infobulle" />
 
     <label for="infobulle2">
-      <img src="img/DarkMode.png" id="DM" />
+      <img src="img/DarkMode.png" alt="mode nuit" id="DM" />
     </label>
     <input type="checkbox" id="infobulle2" />
 
@@ -60,7 +61,7 @@
   
   <div class="reveal">
     <div id="corps">
-      <h2 id="notreselect">Découvrir</h2>
+      <h2 class="titreh2" id="notreselect">Découvrir</h2>
       <div class="random-article">
         <div class="article">
           <a href=""><img src="img/viki1.jpg" alt="image"></a>
@@ -138,6 +139,7 @@
     
 
       <div class="find-items">
+        <h2 class="titreh2" id="result-title">Résultats pour [RECHERCHE]</h2>
         <div class="rectangle">
           <img src="img/test.jpg" alt="image">
           <div class="article-content">
@@ -146,7 +148,7 @@
             <h2>Le Moyen Âge | Archéologie | culture.fr</h2>
           </div>
         </div>
-
+        <h2 class="titreh2" id="result-title">Peut aussi vous intéresser...</h2>
         <div class="rectangle">
           <img src="img/test.jpg" alt="image">
           <div class="article-content">
@@ -163,8 +165,8 @@
           </div>
         </div>
     
+      </div>
     </div>
   </div>
-
 </body>
 </html>

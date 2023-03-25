@@ -69,7 +69,7 @@ nav{
     float: right;
     padding: 5px 5px;
     border-radius: 6px;
-    height: -1px;
+    margin-top: -1px;
 }
 
 input[id="infobulle"]:checked + label>#DM{
@@ -84,6 +84,38 @@ input[type="checkbox"]{
     display: none;
 }
 /* fin Andy ------------------------------------------- 
+
+/*nv mode nuit tests*/
+.mode-switch-label {
+    display: inline-block;
+    width: 60px;
+    height: 36px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 95%;
+    color: yellow;
+  }
+  
+  .mode-switch-icon {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #000000; /* couleur de fond pour l'icône */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  #mode-switch:checked + .mode-switch-label .mode-switch-icon {
+    transform: translateX(16px);
+    background-color: #333; /* couleur de fond pour l'icône en mode sombre */
+  }
+  
+  #mode-switch:checked ~ :root {
+    --bg-color: #333; /* couleur de fond en mode sombre */
+  }
+
 
 
 
@@ -183,7 +215,7 @@ td{
     border-color: #4d90fe;
     box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
 }*/
-#notreselect{
+.titreh2{
     margin-top: 0px;
     font-size: 2rem;
     margin-left: 3%;
@@ -195,8 +227,13 @@ td{
     display: inline-block;
 }
 
-#notreselect.suppr{
+.titreh2.suppr{
     display: none;
+}
+
+#result-title{
+    margin-left: 5%;
+    margin-top: 0;
 }
       
 @keyframes appear {
@@ -211,7 +248,7 @@ to {
 }
 
   
-#notreselect::before {
+.titreh2::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -222,11 +259,11 @@ to {
     transition: width 0.3s ease-in-out;
 }
 
-#notreselect::first-letter{
+.titreh2::first-letter{
     color: rebeccapurple;
 }
 
-#notreselect:hover::before {
+.titreh2:hover::before {
     width: 100%;
 }
   
@@ -270,9 +307,6 @@ to {
     margin-top: auto;
     
 }
-.rectangle .article-content h2{
-    margin-top:0;
-}
 
 .rectangle .article-content p{
     margin-right:  150px;
@@ -282,6 +316,7 @@ to {
     width: 65%;
     height: 100%;
     margin-top: auto;
+    position: relative;
 }
 
 .random-article .article .article-content{
@@ -306,6 +341,9 @@ to {
 
 .rectangle .article-content h2{
     color: rebeccapurple;
+    position: absolute;
+    margin-top: 0px;
+    bottom: 0;
 }
 .rectangle .article-content h2:hover{
     text-decoration: underline;
@@ -424,4 +462,4 @@ to {
     margin: 0;
     z-index: 10;
     transition: all 0.5s ease;
-}
+} 
