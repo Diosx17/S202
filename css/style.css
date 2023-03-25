@@ -45,8 +45,50 @@ nav{
     top: 125px; 
 }
 
-/* Andy ------------------------------------------------*/
+/*nv mode nuit tests*/
+.nightmode.suppr{
+    display: none;
+}
+.mode-switch-label {
+    display: inline-block;
+    width: 68px;
+    height: 36px;
+    position: relative;
+    cursor: pointer;
+    background-color: #c5b4ff7a; /* ajouter une couleur de fond */
+    border-radius: 20px; /* mettre un rayon pour arrondir les coins */
+    margin-left: auto;
+    top: 4px;
+    left: 2px;
+}
 
+#mode-switch{
+    display: none;
+}
+
+.mode-switch-icon {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #282121;
+    transition: transform 0.2s ease-in-out;
+}
+  
+#mode-switch:checked + .mode-switch-label .mode-switch-icon {
+    transform: translateX(32px);
+    background-color: #68deff; 
+}
+  
+#mode-switch:checked ~ :root {
+    --background: #00ff1a ; 
+}
+
+
+/* Andy ------------------------------------------------*/
+/*
 #param{
     height: 80%;
     margin-top: 5px;
@@ -59,11 +101,12 @@ nav{
 #param:active{
     height: 90%;
 }
-
+/*
 #DM{
+/*
     display: none;
     /* visibility: visible; */
-    z-index: 1;
+   /* z-index: 1;
     background-color: rgb(56, 102, 255);
     color: #fff;
     float: right;
@@ -71,52 +114,19 @@ nav{
     border-radius: 6px;
     margin-top: -1px;
 }
-
+/*
 input[id="infobulle"]:checked + label>#DM{
     height: 100px;
     opacity: 100%;
     display: inline-block;
     margin-top: 5px;
     margin-right: 10px;
-}
+}/*
 input[type="checkbox"]{
     position: absolute;
     display: none;
-}
+}*/
 /* fin Andy ------------------------------------------- 
-
-/*nv mode nuit tests*/
-.mode-switch-label {
-    display: inline-block;
-    width: 60px;
-    height: 36px;
-    position: relative;
-    cursor: pointer;
-    margin-left: 95%;
-    color: yellow;
-  }
-  
-  .mode-switch-icon {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: #000000; /* couleur de fond pour l'icône */
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  #mode-switch:checked + .mode-switch-label .mode-switch-icon {
-    transform: translateX(16px);
-    background-color: #333; /* couleur de fond pour l'icône en mode sombre */
-  }
-  
-  #mode-switch:checked ~ :root {
-    --bg-color: #333; /* couleur de fond en mode sombre */
-  }
-
-
 
 
 /*style pour la barre de recherche*/
@@ -231,7 +241,7 @@ td{
     display: none;
 }
 
-#result-title{
+.result-title{
     margin-left: 5%;
     margin-top: 0;
 }

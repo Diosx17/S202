@@ -8,6 +8,7 @@ window.addEventListener('load', function () {
     var nav = document.querySelector('.navigation');
     var finditems = document.querySelector('.find-items');
     var ns = document.querySelector('#notreselect');
+    var nightmode = document.querySelector('.nightmode');
 
     searchButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -19,10 +20,11 @@ window.addEventListener('load', function () {
         nav.classList.add('active');
         finditems.classList.add('active');
         ns.classList.add('suppr');
+        nightmode.classList.add('suppr');
     });
 
     //  Andy ------------------------------------------------------------
-    const checkbox = document.querySelector('#infobulle2');
+    /*const checkbox = document.querySelector('#infobulle2');
     var acc = "#2d2c2c"
     checkbox.addEventListener('click', function() {
         document.body.style.background = acc;
@@ -33,7 +35,7 @@ window.addEventListener('load', function () {
             acc = "#2d2c2c"
         }
         
-    });
+    });*/
     // fin Andy -----------------------------------------------------------
     
     //à continuer c'est pour la barre de recherche qui se met en haut quand on scroll
