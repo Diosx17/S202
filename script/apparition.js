@@ -1,3 +1,21 @@
+/*
+*fonction pour le mode nuit et jour
+*lorsque l'on clique sur le bouton cela lance cette fonction
+*on alterne à l'aide du modulo (variable i) entre le mode jour et le mode nuit
+*/
+i=0;
+function appliqueNuit() {
+    if (i%2==0) {
+    document.body.style.color = "rgb(0,0,0)";
+    document.body.style.backgroundColor = "rgb(30, 30, 30)";
+    }
+    else {
+    document.body.style.color = "rgb(0, 0, 0)";
+    document.body.style.backgroundColor = "#5C97FF";
+    }
+    i++;
+}
+
 window.addEventListener('load', function () {
     var searchButton = document.querySelector('.search-box button[type="submit"]');
     var searchBox = document.querySelector('.search-box');
@@ -22,6 +40,9 @@ window.addEventListener('load', function () {
         ns.classList.add('suppr');
         nightmode.classList.add('suppr');
     });
+});
+
+
 
     //  Andy ------------------------------------------------------------
     /*const checkbox = document.querySelector('#infobulle2');
@@ -50,23 +71,23 @@ window.addEventListener('load', function () {
     });*/
 
 
-    window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('scroll', revealOnScroll);
 
-    function revealOnScroll() {
-        var reveals = document.querySelectorAll('.reveal');
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var revealTop = reveals[i].getBoundingClientRect().top;
-            var revealPoint = 150;
+function revealOnScroll() {
+    var reveals = document.querySelectorAll('.reveal');
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var revealTop = reveals[i].getBoundingClientRect().top;
+        var revealPoint = 150;
 
-            if (revealTop < windowHeight - revealPoint) {
-                reveals[i].classList.add('active');
-            }/* else {
-                reveals[i].classList.remove('active');
-            }*/
-        }
+        if (revealTop < windowHeight - revealPoint) {
+            reveals[i].classList.add('active');
+        }/* else {
+            reveals[i].classList.remove('active');
+        }*/
     }
-});
+}
+
 
 /*pour faire deux css différents : l'un pour le mode sombre et l'autre pour le mode clair
 

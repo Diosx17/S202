@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/responsive.css">
   <script src="script/apparition.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
@@ -13,9 +14,9 @@
   
   <header>
     <nav class="navigation">
-      <a><img src="img/vikidia.png" alt="logo vikidia" id="logo"></a>
+      <a href="index.html"><img src="img/vikidia.png" alt="logo vikidia" id="logo"></a>
       <div class="nightmode">
-          <input type="checkbox" id="mode-switch">
+          <input onclick=appliqueNuit() type="checkbox" id="mode-switch">
           <label for="mode-switch" class="mode-switch-label">
             <span class="mode-switch-icon"></span>
           </label>
@@ -23,7 +24,7 @@
     </nav>
   </header>
 
-  <form action="" method="">
+  <form method="POST" id="formulaire">
     <div class="search-box">
       <input type="text" name="q" placeholder="Veuillez entrer votre recherche">
       <button type="submit"><i class="fa fa-search"></i></button>

@@ -8,6 +8,15 @@ html{
     --test : yellow;
 }
 
+
+/*ici modifier les couleurs pour le dark theme si l'utilisateur a ses paramètres par défaut sur mode nuit*/
+@media (prefers-color-scheme: dark) {
+    :root{
+        --background: black;
+    }
+  }
+
+
 body{
     height: 100%;
 }
@@ -303,10 +312,6 @@ to {
     display: block;
     margin-top: 75px;
 }
-
-.find-items .rectangle:first-child{
-    background-color: #bdd5ff;
-}
   
 .rectangle img{
     width: 45%;
@@ -381,11 +386,6 @@ to {
     border-radius: 10px;
     margin-left: 32.5px;
 
-}
-@media screen and (max-width:1500px){
-    .bloc-historique .icone{
-        margin-left: 0;
-    }
 }
 
 .random-article {
