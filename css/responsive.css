@@ -53,6 +53,9 @@
         margin-left: 25%;
         margin-right: 25%;
     }  
+    .random-article .article p{
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -60,6 +63,17 @@
         width: 65%;
         margin-left: 17.5%;
         margin-right: 17.5%;
+    }
+    .rectangle .article-content p{
+        font-size: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .search-box.active{
+        width: 50%;
+    }
+    .rectangle .article-content h2{
+        margin-top: 0;
     }
 }
 

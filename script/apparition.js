@@ -5,11 +5,14 @@
 */
 i=0;
 function appliqueNuit() {
-    if (i%2==0) {
+    if (i%2==0) {//mode nuit
     document.body.style.color = "rgb(0,0,0)";
-    document.body.style.backgroundColor = "rgb(30, 30, 30)";
+    document.body.style.backgroundColor = "rgb(0,0,0)";
+    //getDocumentById("#corps").style.backgroundColor = "rgb(0,0,0)";
+    //var doc = document.querySelector("#corps");
+    //doc.style.backgroundColor = "rgb(0,0,0)";
     }
-    else {
+    else {//mode nuit
     document.body.style.color = "rgb(0, 0, 0)";
     document.body.style.backgroundColor = "#5C97FF";
     }
