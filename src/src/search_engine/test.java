@@ -21,11 +21,28 @@ import java.nio.charset.StandardCharsets;
 public class test {
 
     public static void main(String[] args) throws Exception {
-        String url = "https://fr.vikidia.org/wiki/Ch%C3%A2teau";
+        String url = "https://fr.vikidia.org/w/index.php?title=Sp%C3%A9cial:Toutes_les_pages&hideredirects=1";
 
         try 
         {
             String content = fetchWebContent(url);
+
+
+            List<String> links = extractLinks(content);
+            List<String> fullLinks = new ArrayList<>();
+            for (String link : links) {
+                if (link.startsWith("/wiki/")) {
+                    String fullLink = "https://fr.vikidia.org" + link;
+                    fullLinks.add(fullLink);
+                    System.out.println(fullLink);
+                }
+                else {
+                    System.out.println(link);
+                }
+            }
+            
+
+
             String textContent = extractContentFromParagraphs(content);
             textContent=textContent.toLowerCase();
             textContent = removeHTMLTagsFromList(textContent);
@@ -36,6 +53,8 @@ public class test {
             textContent=SearchEngine.removeSmallWords(textContent); 
             formatageFichier(textContent);  
                 
+
+
         } 
         catch (IOException e) {
             System.err.println("Erreur lors de la récupération du contenu : " + e.getMessage());
@@ -91,6 +110,21 @@ public class test {
         }
         writer.close();
     }
+
+    public static List<String> extractLinks(String htmlContent) {
+        List<String> links = new ArrayList<>();
+        Pattern pattern = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])(.*?)\\1");
+        Matcher matcher = pattern.matcher(htmlContent);
+        while (matcher.find()) {
+            String link = matcher.group(2);
+            if (link.startsWith("/wiki/")) {
+                links.add(link);
+            }
+        }
+        return links;
+    }
+    
+
     
     
 }
